@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Plugin.h"
 #include "IExamInterface.h"
+#include "GOAP/Brain.h"
 
 //Called only once, during initialization
 void Plugin::Initialize(IBaseInterface* pInterface, PluginInfo& info)
@@ -106,7 +107,11 @@ SteeringPlugin_Output Plugin::UpdateSteering(float dt)
 			std::cout << "Purge Zone in FOV:" << e.Location.x << ", "<< e.Location.y <<  " ---EntityHash: " << e.EntityHash << "---Radius: "<< zoneInfo.Radius << std::endl;
 		}
 	}
-	
+
+	Brain testBrain;
+	testBrain.MakeGraph();
+
+
 
 	//INVENTORY USAGE DEMO
 	//********************

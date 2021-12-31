@@ -7,4 +7,5 @@ public:
 
 class ItemInViewState : public WorldState{};
 class ItemInInventoryState : public WorldState{};
+class NextToPickup : public WorldState{};
 

@@ -1,5 +1,5 @@
 #pragma once
-#include "../Action.h"
+#include "GOAP/Action.h"
 
 class Wander : public Action
 {

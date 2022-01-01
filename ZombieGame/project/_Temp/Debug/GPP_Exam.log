@@ -1,35 +1,12 @@
 ﻿  stdafx.cpp
-  EGraphConnectionTypes.cpp
-  EGraphNodeTypes.cpp
-  EMatrix2x3.cpp
-  Brain.cpp
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\inc\IExamInterface.h(11,20): error C3646: 'World_GetInfo': unknown override specifier
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\inc\IExamInterface.h(11,34): error C2059: syntax error: ')'
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\inc\IExamInterface.h(11,45): error C2238: unexpected token(s) preceding ';'
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\inc\IExamInterface.h(12,25): error C3646: 'World_GetStats': unknown override specifier
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\inc\IExamInterface.h(12,40): error C2059: syntax error: ')'
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\inc\IExamInterface.h(12,51): error C2238: unexpected token(s) preceding ';'
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\inc\IExamInterface.h(14,47): error C2061: syntax error: identifier 'HouseInfo'
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\inc\IExamInterface.h(15,48): error C2061: syntax error: identifier 'EntityInfo'
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\inc\IExamInterface.h(17,20): error C3646: 'Agent_GetInfo': unknown override specifier
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\inc\IExamInterface.h(17,34): error C2059: syntax error: ')'
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\inc\IExamInterface.h(17,45): error C2238: unexpected token(s) preceding ';'
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\inc\IExamInterface.h(18,29): error C2061: syntax error: identifier 'EntityInfo'
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\inc\IExamInterface.h(24,46): error C2061: syntax error: identifier 'ItemInfo'
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\inc\IExamInterface.h(27,46): error C2061: syntax error: identifier 'ItemInfo'
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\inc\IExamInterface.h(31,28): error C2061: syntax error: identifier 'EntityInfo'
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\inc\IExamInterface.h(32,25): error C2061: syntax error: identifier 'EntityInfo'
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\inc\IExamInterface.h(33,28): error C2061: syntax error: identifier 'EntityInfo'
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\inc\IExamInterface.h(35,29): error C2061: syntax error: identifier 'ItemInfo'
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\inc\IExamInterface.h(36,31): error C2061: syntax error: identifier 'ItemInfo'
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\inc\IExamInterface.h(37,29): error C2061: syntax error: identifier 'ItemInfo'
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\inc\IExamInterface.h(41,33): error C2061: syntax error: identifier 'EntityInfo'
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\GOAP\Brain.cpp(80,129): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Action.cpp
-  Goal.cpp
-  PickupAction.cpp
   MoveTo.cpp
-  Plugin.cpp
-  WorldState.cpp
+  PickupAction.cpp
   Wander.cpp
+  Brain.cpp
+  Goal.cpp
+  WorldState.cpp
+  Plugin.cpp
   Generating Code...
+     Creating library D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\..\_DEMO_DEBUG\GPP_Plugin_d.lib and object D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\..\_DEMO_DEBUG\GPP_Plugin_d.exp
+  GPP_Exam.vcxproj -> D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\_DEMO_DEBUG\GPP_Plugin_d.dll

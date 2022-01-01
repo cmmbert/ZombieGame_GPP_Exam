@@ -1,4 +1,5 @@
 #pragma once
+
 #include "IBaseInterface.h"
 
 class IExamInterface: public IBaseInterface

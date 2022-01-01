@@ -13,8 +13,8 @@ void Plugin::Initialize(IBaseInterface* pInterface, PluginInfo& info)
 	//Bit information about the plugin
 	//Please fill this in!!
 	info.BotName = "BotNameTEST";
-	info.Student_FirstName = "Foo";
-	info.Student_LastName = "Bar";
+	info.Student_FirstName = "Bert";
+	info.Student_LastName = "Van Hoorick";
 	info.Student_Class = "2DAEx";
 }
 

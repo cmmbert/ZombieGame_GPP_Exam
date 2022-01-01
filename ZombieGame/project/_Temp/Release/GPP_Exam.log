@@ -1,0 +1,12 @@
+﻿  stdafx.cpp
+  Action.cpp
+  MoveTo.cpp
+  PickupAction.cpp
+  Wander.cpp
+  Brain.cpp
+  Goal.cpp
+  WorldState.cpp
+  Plugin.cpp
+  Generating Code...
+D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\GOAP\Brain.cpp(54): error C4703: potentially uninitialized local pointer variable 'currentGoal' used
+D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\GOAP\Brain.cpp(49): error C4703: potentially uninitialized local pointer variable 'chosenAction' used

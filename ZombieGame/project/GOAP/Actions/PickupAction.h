@@ -1,11 +1,11 @@
 #pragma once
-#include "../Action.h"
-#include "../WorldState.h"
+#include "GOAP/Action.h"
+
 class PickupAction final : public Action
 {
 public:
 	PickupAction();
 
-	void DoAction() override;
+	//void DoAction() override;
 };
 

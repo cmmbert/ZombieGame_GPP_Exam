@@ -1,4 +1,5 @@
 #include "stdafx.h"
+
 #include "Brain.h"
 
 #include "Actions/MoveTo.h"
@@ -10,12 +11,12 @@ Brain::Brain()
 	m_Actions.push_back(new MoveTo());
 }
 
-SteeringPlugin_Output Brain::CalculateAction(IExamInterface* iFace)
+SteeringPlugin_Output Brain::CalculateAction(/*IExamInterface* iFace*/)
 {
 	SteeringPlugin_Output steering;
 
 	//Figure out what to do
-	WorldState* currentGoal;
+	WorldState* currentGoal{};
 	for (auto* goal : m_Goals)
 	{
 		auto result = std::find(m_WorldStates.begin(), m_WorldStates.end(), goal);
@@ -30,7 +31,7 @@ SteeringPlugin_Output Brain::CalculateAction(IExamInterface* iFace)
 	}
 
 	//Figure out how to do it
-	Action* chosenAction;
+	Action* chosenAction{};
 	for (auto* action : m_Actions)
 	{
 		auto effects = action->GetEffectsOnWorld();
@@ -64,7 +65,7 @@ void Brain::MakeGraph()
 {
 	for (auto* action : m_Actions)
 	{
-		action->m_GraphNodeIdx = m_pGraph->AddNode(new Elite::GraphNode2D(m_pGraph->GetNextFreeNodeIndex(), { 0,0 }));
+		//action->m_GraphNodeIdx = m_pGraph->AddNode(new Elite::GraphNode2D(m_pGraph->GetNextFreeNodeIndex(), { 0,0 }));
 	}
 	for (auto* action : m_Actions)
 	{
@@ -77,7 +78,7 @@ void Brain::MakeGraph()
 				{
 					if(effect->Predicate == precondition->Predicate)
 					{
-						m_pGraph->AddConnection(new Elite::GraphConnection(subAction->m_GraphNodeIdx, action->m_GraphNodeIdx, subAction->GetWeight()));
+						//m_pGraph->AddConnection(new Elite::GraphConnection(subAction->m_GraphNodeIdx, action->m_GraphNodeIdx, subAction->GetWeight()));
 					}
 				}
 			}

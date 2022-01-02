@@ -10,6 +10,7 @@ Brain::Brain()
 {
 	m_Actions.push_back(new PickupAction());
 	m_Actions.push_back(new MoveTo());
+	m_pGraph = new Graph();
 }
 
 SteeringPlugin_Output Brain::CalculateAction(/*IExamInterface* iFace*/)
@@ -68,6 +69,8 @@ void Brain::MakeGraph()
 	for (auto* action : m_Actions)
 	{
 		action->m_GraphNodeIdx = m_pGraph->AddNode();
+		int test = 0;
+		m_pGraph->GetNodeByIdx(action->m_GraphNodeIdx)->SetDescription(action->GetName());
 	}
 	for (auto* action : m_Actions)
 	{
@@ -76,11 +79,12 @@ void Brain::MakeGraph()
 			//Get all actions that can fulfill precondition and add connection to this action
 			for (auto* subAction : m_Actions)
 			{
+				if(subAction == action) continue;
 				for(auto* effect : subAction->GetEffectsOnWorld())
 				{
 					if(effect->Predicate == precondition->Predicate)
 					{
-						m_pGraph->AddConnection(subAction->m_GraphNodeIdx, action->m_GraphNodeIdx);
+						m_pGraph->AddConnection(subAction->m_GraphNodeIdx, action->m_GraphNodeIdx, subAction->GetWeight());
 					}
 				}
 			}

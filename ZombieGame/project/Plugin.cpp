@@ -15,7 +15,7 @@ void Plugin::Initialize(IBaseInterface* pInterface, PluginInfo& info)
 	info.BotName = "BotNameTEST";
 	info.Student_FirstName = "Bert";
 	info.Student_LastName = "Van Hoorick";
-	info.Student_Class = "2DAEx";
+	info.Student_Class = "2DAE14N";
 }
 
 //Called only once

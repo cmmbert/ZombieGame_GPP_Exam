@@ -1,6 +1,11 @@
 #include "stdafx.h"
 #include "Graph.h"
 
+Graph::Graph()
+{
+	m_NextValidNodeIdx = 0;
+}
+
 int Graph::AddNode()
 {
 	m_NodeVector.push_back(new GraphNode(m_NextValidNodeIdx));
@@ -11,7 +16,7 @@ int Graph::AddNode()
 void Graph::AddConnection(int FromNodeIdx, int ToNodeIdx, float cost)
 {
 	auto newCon = new GraphConnection();
-	newCon->SetFromIdx(ToNodeIdx);
+	newCon->SetFromIdx(FromNodeIdx);
 	newCon->SetToIdx(ToNodeIdx);
 	newCon->SetCost(cost);
 	m_ConnectionVector.push_back(newCon);

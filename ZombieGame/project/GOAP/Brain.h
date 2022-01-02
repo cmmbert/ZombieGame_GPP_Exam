@@ -24,7 +24,7 @@ private:
 	std::vector<WorldState*> m_Goals;
 
 
-	Graph* m_pGraph;
+	Graph* m_pGraph{};
 
 };
 

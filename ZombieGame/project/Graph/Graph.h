@@ -5,6 +5,7 @@
 class Graph
 {
 public:
+	Graph();
 	std::vector<GraphNode*> GetAllNodes() const { return m_NodeVector; }
 	std::vector<GraphConnection*> GetAllConnections() const { return m_ConnectionVector; }
 

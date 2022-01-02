@@ -4,6 +4,7 @@
 /*=============================================================================*/
 // EVector2.h: Vector2D struct
 /*=============================================================================*/
+#include <stdlib.h>
 #ifndef ELITE_MATH_VECTOR2
 #define	ELITE_MATH_VECTOR2
 namespace Elite

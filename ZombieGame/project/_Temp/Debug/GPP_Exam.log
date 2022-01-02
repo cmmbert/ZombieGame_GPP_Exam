@@ -6,6 +6,9 @@
   Brain.cpp
   Goal.cpp
   WorldState.cpp
+  GraphNode.cpp
+  GraphConnection.cpp
+  Graph.cpp
   Plugin.cpp
   Generating Code...
      Creating library D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\..\_DEMO_DEBUG\GPP_Plugin_d.lib and object D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\..\_DEMO_DEBUG\GPP_Plugin_d.exp

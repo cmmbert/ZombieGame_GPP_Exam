@@ -5,6 +5,7 @@
 #include "Actions/MoveTo.h"
 #include "Actions/PickupAction.h"
 
+
 Brain::Brain()
 {
 	m_Actions.push_back(new PickupAction());
@@ -63,9 +64,10 @@ SteeringPlugin_Output Brain::CalculateAction(/*IExamInterface* iFace*/)
 
 void Brain::MakeGraph()
 {
+	m_pGraph->Reset();
 	for (auto* action : m_Actions)
 	{
-		//action->m_GraphNodeIdx = m_pGraph->AddNode(new Elite::GraphNode2D(m_pGraph->GetNextFreeNodeIndex(), { 0,0 }));
+		action->m_GraphNodeIdx = m_pGraph->AddNode();
 	}
 	for (auto* action : m_Actions)
 	{
@@ -78,7 +80,7 @@ void Brain::MakeGraph()
 				{
 					if(effect->Predicate == precondition->Predicate)
 					{
-						//m_pGraph->AddConnection(new Elite::GraphConnection(subAction->m_GraphNodeIdx, action->m_GraphNodeIdx, subAction->GetWeight()));
+						m_pGraph->AddConnection(subAction->m_GraphNodeIdx, action->m_GraphNodeIdx);
 					}
 				}
 			}

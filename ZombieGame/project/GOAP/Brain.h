@@ -1,12 +1,16 @@
 #pragma once
 #include "stdafx.h"
 
-//#include <IExamInterface.h>
+//#include "IExamInterface.h"
+
 
 #include "Action.h"
 #include "Goal.h"
 #include "Exam_HelperStructs.h"
 #include <vector>
+
+#include "Graph/Graph.h"
+
 
 class Brain
 {
@@ -20,7 +24,7 @@ private:
 	std::vector<WorldState*> m_Goals;
 
 
-	//Elite::Graph2D<Elite::GraphNode2D, Elite::GraphConnection>* m_pGraph;
+	Graph* m_pGraph;
 
 };
 

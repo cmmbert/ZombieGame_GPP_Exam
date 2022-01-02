@@ -10,6 +10,9 @@
     <ClCompile Include="GOAP\Brain.cpp" />
     <ClCompile Include="GOAP\Goal.cpp" />
     <ClCompile Include="GOAP\WorldState.cpp" />
+    <ClCompile Include="Graph\Graph.cpp" />
+    <ClCompile Include="Graph\GraphConnection.cpp" />
+    <ClCompile Include="Graph\GraphNode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Plugin.h" />
@@ -21,5 +24,8 @@
     <ClInclude Include="GOAP\Brain.h" />
     <ClInclude Include="GOAP\Goal.h" />
     <ClInclude Include="GOAP\WorldState.h" />
+    <ClInclude Include="Graph\Graph.h" />
+    <ClInclude Include="Graph\GraphConnection.h" />
+    <ClInclude Include="Graph\GraphNode.h" />
   </ItemGroup>
 </Project>

@@ -6,7 +6,11 @@
   Brain.cpp
   Goal.cpp
   WorldState.cpp
+  GraphNode.cpp
+  GraphConnection.cpp
+  Graph.cpp
+D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\Graph\Graph.cpp(47,2): warning C4002: too many arguments for function-like macro invocation 'assert'
   Plugin.cpp
   Generating Code...
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\GOAP\Brain.cpp(54): error C4703: potentially uninitialized local pointer variable 'currentGoal' used
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\GOAP\Brain.cpp(49): error C4703: potentially uninitialized local pointer variable 'chosenAction' used
+     Creating library _Temp\Release\GPP_Plugin.lib and object _Temp\Release\GPP_Plugin.exp
+  GPP_Exam.vcxproj -> D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\_DEMO_RELEASE\GPP_Plugin.dll

@@ -6,11 +6,13 @@ Graph::Graph()
 	m_NextValidNodeIdx = 0;
 }
 
-int Graph::AddNode()
+int Graph::AddNode(const std::string& description)
 {
-	m_NodeVector.push_back(new GraphNode(m_NextValidNodeIdx));
+	auto newNode = new GraphNode(m_NextValidNodeIdx);
+	newNode->SetDescription(description);
+	m_NodeVector.push_back(newNode);
 	++m_NextValidNodeIdx;
-	return m_NextValidNodeIdx - 1;
+	return newNode->GetIndex();
 }
 
 void Graph::AddConnection(int FromNodeIdx, int ToNodeIdx, float cost)

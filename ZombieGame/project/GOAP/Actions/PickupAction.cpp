@@ -3,7 +3,7 @@
 
 PickupAction::PickupAction()
 {
-	m_Preconditions.push_back(new ItemInViewState());
-	m_EffectOnWorld.push_back(new ItemInInventoryState());
+	m_Preconditions.push_back(new ItemInViewState(true));
+	m_EffectOnWorld.push_back(new ItemInInventoryState(true));
 	m_Name = typeid(this).name();
 }

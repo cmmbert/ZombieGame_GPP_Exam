@@ -4,13 +4,18 @@
 
 #include "Actions/MoveTo.h"
 #include "Actions/PickupAction.h"
+#include "Actions/Wander.h"
 
 
 Brain::Brain()
 {
 	m_Actions.push_back(new PickupAction());
 	m_Actions.push_back(new MoveTo());
+	m_Actions.push_back(new Wander());
 	m_pGraph = new Graph();
+	m_Goals.push_back(new ItemInInventoryState(true));
+
+	m_WorldStates.push_back(new NextToPickup(false));
 }
 
 SteeringPlugin_Output Brain::CalculateAction(/*IExamInterface* iFace*/)
@@ -34,19 +39,7 @@ SteeringPlugin_Output Brain::CalculateAction(/*IExamInterface* iFace*/)
 
 	//Figure out how to do it
 	Action* chosenAction{};
-	for (auto* action : m_Actions)
-	{
-		auto effects = action->GetEffectsOnWorld();
-		auto result = std::find(effects.begin(), effects.end(), currentGoal);
-		if(result != std::end(effects))
-		{
-			if(effects[int(*result)]->Predicate == currentGoal->Predicate)
-			{
-				chosenAction = action;
-				break;
-			}
-		}
-	}
+	
 
 	for (auto* precond : chosenAction->GetPreconditions())
 	{
@@ -66,17 +59,31 @@ SteeringPlugin_Output Brain::CalculateAction(/*IExamInterface* iFace*/)
 void Brain::MakeGraph()
 {
 	m_pGraph->Reset();
+	auto startNode = m_pGraph->AddNode("startNode");
 	for (auto* action : m_Actions)
 	{
 		action->m_GraphNodeIdx = m_pGraph->AddNode();
-		int test = 0;
 		m_pGraph->GetNodeByIdx(action->m_GraphNodeIdx)->SetDescription(action->GetName());
+
+		//Connect this node to the startnode if this node can be used to start from
+		bool conditionsMet = true;
+		for (auto* precondition : action->GetPreconditions())
+		{
+			for (auto* worldState : m_WorldStates)
+			{
+				if (precondition != worldState) conditionsMet = false;
+			}
+		}
+		if(conditionsMet)
+		{
+			m_pGraph->AddConnection(startNode, action->m_GraphNodeIdx);
+		}
 	}
 	for (auto* action : m_Actions)
 	{
+		//Get all actions that can fulfill precondition and add connection to this action
 		for (auto* precondition : action->GetPreconditions())
 		{
-			//Get all actions that can fulfill precondition and add connection to this action
 			for (auto* subAction : m_Actions)
 			{
 				if(subAction == action) continue;
@@ -90,4 +97,6 @@ void Brain::MakeGraph()
 			}
 		}
 	}
+
+
 }

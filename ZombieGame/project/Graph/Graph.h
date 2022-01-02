@@ -9,7 +9,7 @@ public:
 	std::vector<GraphNode*> GetAllNodes() const { return m_NodeVector; }
 	std::vector<GraphConnection*> GetAllConnections() const { return m_ConnectionVector; }
 
-	int AddNode();
+	int AddNode(const std::string& description = "Default");
 	void AddConnection(int FromNodeIdx, int ToNodeIdx, float cost = 1);
 
 	std::vector<GraphConnection*> GetAllConnectionsToNode(int nodeIdx);

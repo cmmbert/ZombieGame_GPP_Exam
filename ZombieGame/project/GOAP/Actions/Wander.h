@@ -3,6 +3,7 @@
 
 class Wander : public Action
 {
-	int m_Weight = 100;
+public:
+	Wander();
 };
 

@@ -1,4 +1,6 @@
 ﻿  stdafx.cpp
+  Dijkstra.cpp
+D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\Graph\Dijkstra.cpp(23,21): warning C4018: '<': signed/unsigned mismatch
   Action.cpp
   MoveToPickup.cpp
   PickupAction.cpp

@@ -13,6 +13,7 @@
     <ClCompile Include="Graph\Graph.cpp" />
     <ClCompile Include="Graph\GraphConnection.cpp" />
     <ClCompile Include="Graph\GraphNode.cpp" />
+    <ClCompile Include="Graph\Dijkstra.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Plugin.h" />
@@ -27,5 +28,6 @@
     <ClInclude Include="Graph\Graph.h" />
     <ClInclude Include="Graph\GraphConnection.h" />
     <ClInclude Include="Graph\GraphNode.h" />
+    <ClInclude Include="Graph\Dijkstra.h" />
   </ItemGroup>
 </Project>

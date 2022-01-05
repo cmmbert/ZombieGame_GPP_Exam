@@ -5,6 +5,7 @@
 #include "Actions/MoveToPickup.h"
 #include "Actions/PickupAction.h"
 #include "Actions/Wander.h"
+#include "Graph/Dijkstra.h"
 
 
 Brain::Brain(std::vector<WorldState*>* pWorldStates)
@@ -38,7 +39,7 @@ SteeringPlugin_Output Brain::CalculateAction(/*IExamInterface* iFace*/)
 	//Figure out how to do it
 	if(currentGoal != nullptr)
 		MakeGraph(currentGoal);
-
+	Dijkstra::FindPath(m_pGraph, m_pGraph->GetNodeByIdx(0), m_pGraph->GetNodeByIdx(1));
 	return steering;
 }
 

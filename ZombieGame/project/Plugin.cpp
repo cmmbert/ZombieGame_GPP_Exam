@@ -18,6 +18,7 @@ void Plugin::Initialize(IBaseInterface* pInterface, PluginInfo& info)
 	info.Student_Class = "2DAE14N";
 
 	m_WorldStates.push_back(new ItemInInventoryState(false));
+	m_WorldStates.push_back(new ItemInViewState(true));
 	m_WorldStates.push_back(new NextToPickup(false));
 
 }
@@ -113,7 +114,7 @@ SteeringPlugin_Output Plugin::UpdateSteering(float dt)
 	}
 
 	Brain testBrain(&m_WorldStates);
-	testBrain.MakeGraph(new ItemInInventoryState(true));
+	testBrain.CalculateAction();
 
 
 

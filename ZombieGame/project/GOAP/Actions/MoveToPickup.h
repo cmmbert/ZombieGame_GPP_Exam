@@ -1,9 +1,9 @@
 #pragma once
 #include "GOAP/Action.h"
 
-class MoveTo : public Action
+class MoveToPickup : public Action
 {
 public:
-	MoveTo();
+	MoveToPickup();
 };
 

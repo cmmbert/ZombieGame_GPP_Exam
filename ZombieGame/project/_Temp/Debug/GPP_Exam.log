@@ -1,6 +1,6 @@
 ﻿  stdafx.cpp
   Action.cpp
-  MoveTo.cpp
+  MoveToPickup.cpp
   PickupAction.cpp
   Wander.cpp
   Brain.cpp

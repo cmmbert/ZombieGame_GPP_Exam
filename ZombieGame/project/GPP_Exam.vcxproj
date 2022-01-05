@@ -182,7 +182,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="GOAP\Action.h" />
-    <ClInclude Include="GOAP\Actions\MoveTo.h" />
+    <ClInclude Include="GOAP\Actions\MoveToPickup.h" />
     <ClInclude Include="GOAP\Actions\PickupAction.h" />
     <ClInclude Include="GOAP\Actions\Wander.h" />
     <ClInclude Include="GOAP\Brain.h" />
@@ -196,7 +196,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GOAP\Action.cpp" />
-    <ClCompile Include="GOAP\Actions\MoveTo.cpp" />
+    <ClCompile Include="GOAP\Actions\MoveToPickup.cpp" />
     <ClCompile Include="GOAP\Actions\PickupAction.cpp" />
     <ClCompile Include="GOAP\Actions\Wander.cpp" />
     <ClCompile Include="GOAP\Brain.cpp" />

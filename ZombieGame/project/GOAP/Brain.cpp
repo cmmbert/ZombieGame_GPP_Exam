@@ -2,7 +2,7 @@
 
 #include "Brain.h"
 
-#include "Actions/MoveTo.h"
+#include "Actions/MoveToPickup.h"
 #include "Actions/PickupAction.h"
 #include "Actions/Wander.h"
 
@@ -10,7 +10,7 @@
 Brain::Brain(std::vector<WorldState*>* pWorldStates)
 {
 	m_Actions.push_back(new PickupAction());
-	m_Actions.push_back(new MoveTo());
+	m_Actions.push_back(new MoveToPickup());
 	m_Actions.push_back(new Wander());
 	m_pGraph = new Graph();
 	m_Goals.push_back(new ItemInInventoryState(true));
@@ -25,19 +25,19 @@ SteeringPlugin_Output Brain::CalculateAction(/*IExamInterface* iFace*/)
 	WorldState* currentGoal{};
 	for (auto* goal : m_Goals)
 	{
-		auto result = std::find(m_pWorldStates->begin(), m_pWorldStates->end(), goal);
-		if(result != std::end(*m_pWorldStates))
+		for(auto* state : (*m_pWorldStates))
 		{
-			if((*m_pWorldStates)[int(*result)]->Predicate == goal->Predicate)
-				continue;
-			else
+			if(state->m_Name == goal->m_Name && state->Predicate != goal->Predicate)
+			{
 				currentGoal = goal;
-			break;
+				break;
+			}
 		}
 	}
 
 	//Figure out how to do it
-	MakeGraph(currentGoal);
+	if(currentGoal != nullptr)
+		MakeGraph(currentGoal);
 
 	return steering;
 }
@@ -92,7 +92,7 @@ void Brain::MakeGraph(WorldState* stateToAchieve)
 				if(subAction == action) continue;
 				for(auto* effect : subAction->GetEffectsOnWorld())
 				{
-					if(effect->Predicate == precondition->Predicate)
+					if(effect->m_Name == precondition->m_Name && effect->Predicate == precondition->Predicate)
 					{
 						m_pGraph->AddConnection(subAction->m_GraphNodeIdx, action->m_GraphNodeIdx, subAction->GetWeight());
 					}
@@ -100,6 +100,5 @@ void Brain::MakeGraph(WorldState* stateToAchieve)
 			}
 		}
 	}
-
 
 }

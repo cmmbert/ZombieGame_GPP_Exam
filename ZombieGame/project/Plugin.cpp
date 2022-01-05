@@ -12,7 +12,7 @@ void Plugin::Initialize(IBaseInterface* pInterface, PluginInfo& info)
 
 	//Bit information about the plugin
 	//Please fill this in!!
-	info.BotName = "BotNameTEST";
+	info.BotName = "GO GOAP";
 	info.Student_FirstName = "Bert";
 	info.Student_LastName = "Van Hoorick";
 	info.Student_Class = "2DAE14N";
@@ -113,7 +113,7 @@ SteeringPlugin_Output Plugin::UpdateSteering(float dt)
 	}
 
 	Brain testBrain(&m_WorldStates);
-	testBrain.MakeGraph(m_WorldStates[0], true);
+	testBrain.MakeGraph(new ItemInInventoryState(true));
 
 
 

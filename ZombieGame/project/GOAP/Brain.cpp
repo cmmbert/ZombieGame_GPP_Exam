@@ -37,25 +37,12 @@ SteeringPlugin_Output Brain::CalculateAction(/*IExamInterface* iFace*/)
 	}
 
 	//Figure out how to do it
-	Action* chosenAction{};
-	
-
-	for (auto* precond : chosenAction->GetPreconditions())
-	{
-		auto result = std::find(m_pWorldStates->begin(), m_pWorldStates->end(), precond);
-		if (result != std::end(*m_pWorldStates))
-		{
-			if ((*m_pWorldStates)[int(*result)]->Predicate != currentGoal->Predicate)
-			{
-				//precondition not met
-			}
-		}
-	}
+	MakeGraph(currentGoal);
 
 	return steering;
 }
 
-void Brain::MakeGraph(WorldState* stateToAchieve, bool predicate)
+void Brain::MakeGraph(WorldState* stateToAchieve)
 {
 	m_pGraph->Reset();
 	auto startNode = m_pGraph->AddNode("startNode");
@@ -84,7 +71,7 @@ void Brain::MakeGraph(WorldState* stateToAchieve, bool predicate)
 		bool actionAchievesGoal = false;
 		for( auto* effect : action->GetEffectsOnWorld())
 		{
-			if(effect->m_Name == stateToAchieve->m_Name)
+			if(effect->m_Name == stateToAchieve->m_Name && effect->Predicate == stateToAchieve->Predicate)
 			{
 				actionAchievesGoal = true;
 				break;

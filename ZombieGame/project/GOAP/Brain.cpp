@@ -7,15 +7,14 @@
 #include "Actions/Wander.h"
 
 
-Brain::Brain()
+Brain::Brain(std::vector<WorldState*>* pWorldStates)
 {
 	m_Actions.push_back(new PickupAction());
 	m_Actions.push_back(new MoveTo());
 	m_Actions.push_back(new Wander());
 	m_pGraph = new Graph();
 	m_Goals.push_back(new ItemInInventoryState(true));
-
-	m_WorldStates.push_back(new NextToPickup(false));
+	m_pWorldStates = pWorldStates;
 }
 
 SteeringPlugin_Output Brain::CalculateAction(/*IExamInterface* iFace*/)
@@ -26,10 +25,10 @@ SteeringPlugin_Output Brain::CalculateAction(/*IExamInterface* iFace*/)
 	WorldState* currentGoal{};
 	for (auto* goal : m_Goals)
 	{
-		auto result = std::find(m_WorldStates.begin(), m_WorldStates.end(), goal);
-		if(result != std::end(m_WorldStates))
+		auto result = std::find(m_pWorldStates->begin(), m_pWorldStates->end(), goal);
+		if(result != std::end(*m_pWorldStates))
 		{
-			if(m_WorldStates[int(*result)]->Predicate == goal->Predicate)
+			if((*m_pWorldStates)[int(*result)]->Predicate == goal->Predicate)
 				continue;
 			else
 				currentGoal = goal;
@@ -43,10 +42,10 @@ SteeringPlugin_Output Brain::CalculateAction(/*IExamInterface* iFace*/)
 
 	for (auto* precond : chosenAction->GetPreconditions())
 	{
-		auto result = std::find(m_WorldStates.begin(), m_WorldStates.end(), precond);
-		if (result != std::end(m_WorldStates))
+		auto result = std::find(m_pWorldStates->begin(), m_pWorldStates->end(), precond);
+		if (result != std::end(*m_pWorldStates))
 		{
-			if (m_WorldStates[int(*result)]->Predicate != currentGoal->Predicate)
+			if ((*m_pWorldStates)[int(*result)]->Predicate != currentGoal->Predicate)
 			{
 				//precondition not met
 			}
@@ -56,10 +55,11 @@ SteeringPlugin_Output Brain::CalculateAction(/*IExamInterface* iFace*/)
 	return steering;
 }
 
-void Brain::MakeGraph()
+void Brain::MakeGraph(WorldState* stateToAchieve, bool predicate)
 {
 	m_pGraph->Reset();
 	auto startNode = m_pGraph->AddNode("startNode");
+	auto endNode = m_pGraph->AddNode("endNode");
 	for (auto* action : m_Actions)
 	{
 		action->m_GraphNodeIdx = m_pGraph->AddNode();
@@ -69,14 +69,30 @@ void Brain::MakeGraph()
 		bool conditionsMet = true;
 		for (auto* precondition : action->GetPreconditions())
 		{
-			for (auto* worldState : m_WorldStates)
+			for (auto* worldState : *m_pWorldStates)
 			{
-				if (precondition != worldState) conditionsMet = false;
+				if (precondition->m_Name == worldState->m_Name && precondition->Predicate != worldState->Predicate) 
+					conditionsMet = false;
 			}
 		}
 		if(conditionsMet)
 		{
-			m_pGraph->AddConnection(startNode, action->m_GraphNodeIdx);
+			m_pGraph->AddConnection(startNode, action->m_GraphNodeIdx, 0);
+		}
+
+		//Connect this node to the endnode if this action achieves the goal
+		bool actionAchievesGoal = false;
+		for( auto* effect : action->GetEffectsOnWorld())
+		{
+			if(effect->m_Name == stateToAchieve->m_Name)
+			{
+				actionAchievesGoal = true;
+				break;
+			}
+		}
+		if(actionAchievesGoal)
+		{
+			m_pGraph->AddConnection(action->m_GraphNodeIdx, endNode, 0);
 		}
 	}
 	for (auto* action : m_Actions)

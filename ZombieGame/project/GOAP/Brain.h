@@ -15,12 +15,12 @@
 class Brain
 {
 public:
-	Brain();
+	Brain(std::vector<WorldState*>* pWorldStates);
 	SteeringPlugin_Output CalculateAction(/*IExamInterface* iFace*/);
-	void MakeGraph();
+	void MakeGraph(WorldState* stateToAchieve, bool predicate);
 private:
 	std::vector<Action*> m_Actions;
-	std::vector<WorldState*> m_WorldStates;
+	std::vector<WorldState*>* m_pWorldStates;
 	std::vector<WorldState*> m_Goals;
 
 

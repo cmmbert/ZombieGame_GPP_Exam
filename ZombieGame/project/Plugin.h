@@ -1,6 +1,7 @@
 #pragma once
 #include "IExamPlugin.h"
 #include "Exam_HelperStructs.h"
+#include "GOAP/WorldState.h"
 
 class IBaseInterface;
 class IExamInterface;
@@ -33,6 +34,10 @@ private:
 	bool m_UseItem = false; //Demo purpose
 	bool m_RemoveItem = false; //Demo purpose
 	float m_AngSpeed = 0.f; //Demo purpose
+
+
+	std::vector<WorldState*> m_WorldStates;
+
 };
 
 //ENTRY

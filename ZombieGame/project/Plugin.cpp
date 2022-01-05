@@ -16,6 +16,10 @@ void Plugin::Initialize(IBaseInterface* pInterface, PluginInfo& info)
 	info.Student_FirstName = "Bert";
 	info.Student_LastName = "Van Hoorick";
 	info.Student_Class = "2DAE14N";
+
+	m_WorldStates.push_back(new ItemInInventoryState(false));
+	m_WorldStates.push_back(new NextToPickup(false));
+
 }
 
 //Called only once
@@ -108,8 +112,8 @@ SteeringPlugin_Output Plugin::UpdateSteering(float dt)
 		}
 	}
 
-	Brain testBrain;
-	testBrain.MakeGraph();
+	Brain testBrain(&m_WorldStates);
+	testBrain.MakeGraph(m_WorldStates[0], true);
 
 
 

@@ -18,8 +18,9 @@ void Plugin::Initialize(IBaseInterface* pInterface, PluginInfo& info)
 	info.Student_Class = "2DAE14N";
 
 	m_WorldStates.push_back(new ItemInInventoryState(false));
-	m_WorldStates.push_back(new ItemInViewState(true));
+	m_WorldStates.push_back(new ItemInViewState(false));
 	m_WorldStates.push_back(new NextToPickup(false));
+	m_WorldStates.push_back(new Wanderlust(false));
 
 }
 
@@ -93,6 +94,7 @@ void Plugin::Update(float dt)
 //This function calculates the new SteeringOutput, called once per frame
 SteeringPlugin_Output Plugin::UpdateSteering(float dt)
 {
+	UpdateWorldStates();
 	auto steering = SteeringPlugin_Output();
 
 	//Use the Interface (IAssignmentInterface) to 'interface' with the AI_Framework
@@ -114,7 +116,7 @@ SteeringPlugin_Output Plugin::UpdateSteering(float dt)
 	}
 
 	Brain testBrain(&m_WorldStates);
-	testBrain.CalculateAction();
+	testBrain.CalculateAction(m_pInterface);
 
 
 
@@ -171,6 +173,25 @@ SteeringPlugin_Output Plugin::UpdateSteering(float dt)
 	m_RemoveItem = false;
 
 	return steering;
+}
+
+void Plugin::UpdateWorldStates()
+{
+	
+	auto entitties = GetEntitiesInFOV();
+	m_WorldStates[1]->Predicate = false;
+	m_WorldStates[2]->Predicate = false;
+
+	for (auto entityInfo : entitties)
+	{
+		if (entityInfo.Type == eEntityType::ITEM)
+		{
+			m_WorldStates[1]->Predicate = true;
+			if((entityInfo.Location - m_pInterface->Agent_GetInfo().Position).Magnitude() < 2)
+				m_WorldStates[2]->Predicate = true;
+
+		}
+	}
 }
 
 //This function should only be used for rendering debug elements

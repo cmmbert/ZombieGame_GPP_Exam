@@ -20,6 +20,7 @@ public:
 	void Update(float dt) override;
 
 	SteeringPlugin_Output UpdateSteering(float dt) override;
+	void UpdateWorldStates();
 	void Render(float dt) const override;
 
 private:

@@ -7,6 +7,8 @@
 #include "Actions/Wander.h"
 #include "Graph/Dijkstra.h"
 
+#include "IExamInterface.h"
+
 
 Brain::Brain(std::vector<WorldState*>* pWorldStates)
 {
@@ -15,31 +17,39 @@ Brain::Brain(std::vector<WorldState*>* pWorldStates)
 	m_Actions.push_back(new Wander());
 	m_pGraph = new Graph();
 	m_Goals.push_back(new ItemInInventoryState(true));
+	m_Goals.push_back(new Wanderlust(true));
 	m_pWorldStates = pWorldStates;
 }
 
-SteeringPlugin_Output Brain::CalculateAction(/*IExamInterface* iFace*/)
+SteeringPlugin_Output Brain::CalculateAction(IExamInterface* iFace)
 {
 	SteeringPlugin_Output steering;
 
 	//Figure out what to do
-	WorldState* currentGoal{};
+	WorldState* currentGoal = nullptr;
+	vector<GraphNode*> actions;
 	for (auto* goal : m_Goals)
 	{
 		for(auto* state : (*m_pWorldStates))
 		{
 			if(state->m_Name == goal->m_Name && state->Predicate != goal->Predicate)
 			{
-				currentGoal = goal;
-				break;
+				//Figure out how to do it
+				MakeGraph(goal);
+				actions = Dijkstra::FindPath(m_pGraph, m_pGraph->GetNodeByIdx(0), m_pGraph->GetNodeByIdx(1));
+
+				//Check if endnode is present, if so then we have found our goal
+				//If endnode is not present in the path then the goal is impossible right now
+				if (std::find(actions.begin(), actions.end(), m_pGraph->GetNodeByIdx(1)) != actions.end())
+				{
+					currentGoal = goal;
+					break;
+				}
 			}
 		}
+		if (currentGoal != nullptr) break;
 	}
-
-	//Figure out how to do it
-	if(currentGoal != nullptr)
-		MakeGraph(currentGoal);
-	Dijkstra::FindPath(m_pGraph, m_pGraph->GetNodeByIdx(0), m_pGraph->GetNodeByIdx(1));
+	std::cout << actions[1]->GetDescription() << "\n";
 	return steering;
 }
 

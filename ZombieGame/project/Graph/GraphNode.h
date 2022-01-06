@@ -8,6 +8,7 @@ public:
 	void SetIndex(int idx) { m_Index = idx; }
 
 	void SetDescription(const std::string& desc) { m_Description = desc; }
+	const std::string& GetDescription() const { return m_Description; }
 private:
 	int m_Index;
 	std::string m_Description;  //For debug purposes

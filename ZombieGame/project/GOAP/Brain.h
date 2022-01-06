@@ -1,8 +1,6 @@
 #pragma once
 #include "stdafx.h"
 
-//#include "IExamInterface.h"
-
 
 #include "Action.h"
 #include "Goal.h"
@@ -11,12 +9,14 @@
 
 #include "Graph/Graph.h"
 
+class IExamInterface;
+
 
 class Brain
 {
 public:
 	Brain(std::vector<WorldState*>* pWorldStates);
-	SteeringPlugin_Output CalculateAction(/*IExamInterface* iFace*/);
+	SteeringPlugin_Output CalculateAction(IExamInterface* iFace);
 	void MakeGraph(WorldState* stateToAchieve);
 private:
 	std::vector<Action*> m_Actions;

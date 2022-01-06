@@ -1,9 +1,13 @@
 #pragma once
+
+class IExamInterface;
+
 class WorldState
 {
 public:
 	WorldState() = delete;
 	WorldState(bool predicate);
+	//virtual void Update(float elapsedSec, IExamInterface* iFace);
 	bool Predicate;
 	std::string m_Name;
 };
@@ -30,6 +34,15 @@ public:
 		: WorldState(predicate)
 	{
 		m_Name = "NextToPickup";
+	}
+};
+
+class Wanderlust : public WorldState {
+public:
+	explicit Wanderlust(bool predicate)
+		: WorldState(predicate)
+	{
+		m_Name = "Wanderlust";
 	}
 };
 

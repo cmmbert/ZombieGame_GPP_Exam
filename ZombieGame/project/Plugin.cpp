@@ -2,6 +2,8 @@
 #include "Plugin.h"
 #include "IExamInterface.h"
 #include "GOAP/Brain.h"
+#include "GOAP/WorldStates/IsHungry.h"
+#include "GOAP/WorldStates/IsHurtState.h"
 #include "GOAP/WorldStates/ItemInInventoryState.h"
 #include "GOAP/WorldStates/ItemInViewState.h"
 #include "GOAP/WorldStates/NextToPickupState.h"
@@ -21,6 +23,8 @@ void Plugin::Initialize(IBaseInterface* pInterface, PluginInfo& info)
 	info.Student_LastName = "Van Hoorick";
 	info.Student_Class = "2DAE14N";
 
+	m_WorldStates.push_back(new IsHurtState(false));
+	m_WorldStates.push_back(new IsHungry(false));
 	m_WorldStates.push_back(new ItemInInventoryState(false));
 	m_WorldStates.push_back(new ItemInViewState(false));
 	m_WorldStates.push_back(new NextToPickup(false));

@@ -13,6 +13,8 @@
   GraphConnection.cpp
   Graph.cpp
   NextToPickupState.cpp
+  IsHungry.cpp
+  IsHurtState.cpp
   Plugin.cpp
   WanderlustState.cpp
   Generating Code...

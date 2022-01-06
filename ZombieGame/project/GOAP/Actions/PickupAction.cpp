@@ -37,9 +37,16 @@ bool PickupAction::Execute(SteeringPlugin_Output& steeringOutput, IExamInterface
 						}
 					break;
 				case eItemType::FOOD:
-					iFace->Inventory_RemoveItem(2);
-					iFace->Inventory_AddItem(2, item);
-					break;
+					{
+						ItemInfo food;
+						iFace->Inventory_GetItem(2, food);
+						if(iFace->Food_GetEnergy(food) < iFace->Food_GetEnergy(item))
+						{
+							iFace->Inventory_RemoveItem(2);
+							iFace->Inventory_AddItem(2, item);
+						}
+						break;
+					}
 				case eItemType::GARBAGE: 
 				default:
 					iFace->Inventory_AddItem(4, item);

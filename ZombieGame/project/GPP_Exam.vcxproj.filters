@@ -18,6 +18,8 @@
     <ClCompile Include="GOAP\WorldStates\NextToPickupState.cpp" />
     <ClCompile Include="GOAP\WorldStates\WanderlustState.cpp" />
     <ClCompile Include="GOAP\WorldStates\ItemInViewState.cpp" />
+    <ClCompile Include="GOAP\WorldStates\IsHungry.cpp" />
+    <ClCompile Include="GOAP\WorldStates\IsHurtState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Plugin.h" />
@@ -37,5 +39,7 @@
     <ClInclude Include="GOAP\WorldStates\ItemInInventoryState.h" />
     <ClInclude Include="GOAP\WorldStates\NextToPickupState.h" />
     <ClInclude Include="GOAP\WorldStates\WanderlustState.h" />
+    <ClInclude Include="GOAP\WorldStates\IsHungry.h" />
+    <ClInclude Include="GOAP\WorldStates\IsHurtState.h" />
   </ItemGroup>
 </Project>

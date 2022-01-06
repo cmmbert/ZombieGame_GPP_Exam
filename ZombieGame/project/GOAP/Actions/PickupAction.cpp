@@ -23,6 +23,11 @@ bool PickupAction::Execute(SteeringPlugin_Output& steeringOutput, IExamInterface
 			if ((entityInfo.Location - iFace->Agent_GetInfo().Position).Magnitude() < iFace->Agent_GetInfo().GrabRange)
 			{
 				iFace->Item_Grab(entityInfo, item);
+				if (item.Type == eItemType::GARBAGE)
+				{
+					iFace->Item_Destroy(entityInfo);
+					break;
+				}
 				iFace->Inventory_AddItem(0, item);
 				break;
 			}

@@ -10,3 +10,9 @@ PickupAction::PickupAction()
 	m_EffectOnWorld.push_back(new ItemInInventoryState(true));
 	m_Name = typeid(this).name();
 }
+
+SteeringPlugin_Output PickupAction::Execute(IExamInterface* iFace, const vector<EntityInfo>& entities)
+{
+	SteeringPlugin_Output output{};
+	return output;
+}

@@ -120,7 +120,7 @@ SteeringPlugin_Output Plugin::UpdateSteering(float dt)
 	}
 
 	Brain testBrain(&m_WorldStates);
-	testBrain.CalculateAction(m_pInterface);
+	return testBrain.CalculateAction(m_pInterface);
 
 
 

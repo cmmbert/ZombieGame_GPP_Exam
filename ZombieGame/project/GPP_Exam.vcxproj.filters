@@ -3,7 +3,7 @@
   <ItemGroup>
     <ClCompile Include="Plugin.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="GOAP\Action.cpp" />
+    <ClCompile Include="GOAP\Actions\Action.cpp" />
     <ClCompile Include="GOAP\Actions\MoveToPickup.cpp" />
     <ClCompile Include="GOAP\Actions\PickupAction.cpp" />
     <ClCompile Include="GOAP\Actions\Wander.cpp" />
@@ -22,7 +22,7 @@
   <ItemGroup>
     <ClInclude Include="Plugin.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="GOAP\Action.h" />
+    <ClInclude Include="GOAP\Actions\Action.h" />
     <ClInclude Include="GOAP\Actions\MoveToPickup.h" />
     <ClInclude Include="GOAP\Actions\PickupAction.h" />
     <ClInclude Include="GOAP\Actions\Wander.h" />

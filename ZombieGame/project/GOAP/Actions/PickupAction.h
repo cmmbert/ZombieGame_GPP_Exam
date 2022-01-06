@@ -1,11 +1,10 @@
 #pragma once
-#include "GOAP/Action.h"
+#include "GOAP/Actions/Action.h"
 
 class PickupAction final : public Action
 {
 public:
 	PickupAction();
-
-	//void DoAction() override;
+	SteeringPlugin_Output Execute(IExamInterface* iFace, const vector<EntityInfo>& entities) override;
 };
 

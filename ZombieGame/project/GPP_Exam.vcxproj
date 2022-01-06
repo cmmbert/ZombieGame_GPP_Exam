@@ -184,7 +184,7 @@
     <ClInclude Include="GOAP\WorldStates\ItemInInventoryState.h" />
     <ClInclude Include="GOAP\WorldStates\ItemInViewState.h" />
     <ClInclude Include="Graph\Dijkstra.h" />
-    <ClInclude Include="GOAP\Action.h" />
+    <ClInclude Include="GOAP\Actions\Action.h" />
     <ClInclude Include="GOAP\Actions\MoveToPickup.h" />
     <ClInclude Include="GOAP\Actions\PickupAction.h" />
     <ClInclude Include="GOAP\Actions\Wander.h" />
@@ -203,7 +203,7 @@
     <ClCompile Include="GOAP\WorldStates\ItemInInventoryState.cpp" />
     <ClCompile Include="GOAP\WorldStates\ItemInViewState.cpp" />
     <ClCompile Include="Graph\Dijkstra.cpp" />
-    <ClCompile Include="GOAP\Action.cpp" />
+    <ClCompile Include="GOAP\Actions\Action.cpp" />
     <ClCompile Include="GOAP\Actions\MoveToPickup.cpp" />
     <ClCompile Include="GOAP\Actions\PickupAction.cpp" />
     <ClCompile Include="GOAP\Actions\Wander.cpp" />

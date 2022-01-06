@@ -1,5 +1,5 @@
 #pragma once
-#include "WorldStates/WorldState.h"
+#include "GOAP/WorldStates/WorldState.h"
 #include <vector>
 
 class Action
@@ -12,6 +12,9 @@ public:
 	float GetWeight() { return m_Weight; }
 
 	std::string GetName() { return m_Name; }
+
+
+	virtual SteeringPlugin_Output Execute(IExamInterface* iFace, const vector<EntityInfo>& entities) = 0;
 protected:
 	~Action();
 	std::vector<WorldState*> m_Preconditions;

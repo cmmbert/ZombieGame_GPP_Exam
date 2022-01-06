@@ -23,9 +23,8 @@ Brain::Brain(std::vector<WorldState*>* pWorldStates)
 	m_pWorldStates = pWorldStates;
 }
 
-SteeringPlugin_Output Brain::CalculateAction(IExamInterface* iFace)
+bool Brain::CalculateAction(SteeringPlugin_Output& steeringOutput, IExamInterface* iFace, const vector<EntityInfo>& entities)
 {
-	SteeringPlugin_Output steering;
 
 	//Figure out what to do
 	WorldState* currentGoal = nullptr;
@@ -52,7 +51,19 @@ SteeringPlugin_Output Brain::CalculateAction(IExamInterface* iFace)
 		if (currentGoal != nullptr) break;
 	}
 	std::cout << actions[1]->GetDescription() << "\n";
-	return steering;
+	Action* currentAction = nullptr;
+	for(auto pAction : m_Actions)
+	{
+		if(pAction->GetName() == actions[1]->GetDescription())
+		{
+			currentAction = pAction;
+			break;
+		}
+	}
+	
+	
+
+	return currentAction->Execute(steeringOutput, iFace, entities);;
 }
 
 void Brain::MakeGraph(WorldState* stateToAchieve)

@@ -10,7 +10,7 @@ void NextToPickup::Update(float elapsedSec, IExamInterface* iFace, const vector<
 	{
 		if (entityInfo.Type == eEntityType::ITEM)
 		{
-			if ((entityInfo.Location - iFace->Agent_GetInfo().Position).Magnitude() < m_PickupRange)
+			if ((entityInfo.Location - iFace->Agent_GetInfo().Position).Magnitude() < iFace->Agent_GetInfo().GrabRange)
 			{
 				Predicate = true;
 				break;

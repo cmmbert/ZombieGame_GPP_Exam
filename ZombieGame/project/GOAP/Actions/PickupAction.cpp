@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "PickupAction.h"
 
+#include <IExamInterface.h>
+
 #include "GOAP/WorldStates/ItemInInventoryState.h"
 #include "GOAP/WorldStates/NextToPickupState.h"
 
@@ -11,8 +13,21 @@ PickupAction::PickupAction()
 	m_Name = typeid(this).name();
 }
 
-SteeringPlugin_Output PickupAction::Execute(IExamInterface* iFace, const vector<EntityInfo>& entities)
+bool PickupAction::Execute(SteeringPlugin_Output& steeringOutput, IExamInterface* iFace, const vector<EntityInfo>& entities)
 {
-	SteeringPlugin_Output output{};
-	return output;
+	auto item = ItemInfo();
+	for (const auto& entityInfo : entities)
+	{
+		if (entityInfo.Type == eEntityType::ITEM)
+		{
+			if ((entityInfo.Location - iFace->Agent_GetInfo().Position).Magnitude() < iFace->Agent_GetInfo().GrabRange)
+			{
+				iFace->Item_Grab(entityInfo, item);
+				iFace->Inventory_AddItem(0, item);
+				break;
+			}
+
+		}
+	}
+	return false;
 }

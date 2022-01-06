@@ -14,11 +14,9 @@ MoveToPickup::MoveToPickup()
 	m_Weight = 2.5f;
 }
 
-SteeringPlugin_Output MoveToPickup::Execute(IExamInterface* iFace, const vector<EntityInfo>& entities)
+bool MoveToPickup::Execute(SteeringPlugin_Output& steeringOutput, IExamInterface* iFace, const vector<EntityInfo>& entities)
 {
-	SteeringPlugin_Output output{};
-
-	if (entities.empty()) return output;
+	if (entities.empty()) return false;
 	Elite::Vector2 target;
 
 	float closestDistance = FLT_MAX;
@@ -32,10 +30,10 @@ SteeringPlugin_Output MoveToPickup::Execute(IExamInterface* iFace, const vector<
 			if(distance < closestDistance)
 			{
 				closestDistance = distance;
-				output.LinearVelocity = entity.Location - agentInfo.Position;
+				steeringOutput.LinearVelocity = entity.Location - agentInfo.Position;
 			}
 		}
 	}
-	output.LinearVelocity = output.LinearVelocity.GetNormalized() * agentInfo.MaxLinearSpeed;
-	return output;
+	steeringOutput.LinearVelocity = steeringOutput.LinearVelocity.GetNormalized() * agentInfo.MaxLinearSpeed;
+	return true;
 }

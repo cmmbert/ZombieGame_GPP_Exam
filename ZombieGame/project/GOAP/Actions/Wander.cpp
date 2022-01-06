@@ -10,8 +10,7 @@ Wander::Wander()
 	m_Weight = 100;
 }
 
-SteeringPlugin_Output Wander::Execute(IExamInterface* iFace, const vector<EntityInfo>& entities)
+bool Wander::Execute(SteeringPlugin_Output& steeringOutput, IExamInterface* iFace, const vector<EntityInfo>& entities)
 {
-	SteeringPlugin_Output output{};
-	return output;
+	return false;
 }

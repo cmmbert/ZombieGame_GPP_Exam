@@ -26,8 +26,8 @@ struct GameDebugParams //Debuggin Purposes only (Ignored during release build)
 		EnemyCount = enemyCount;
 	}
 
-	bool SpawnEnemies = true; //Spawn enemies?
-	int EnemyCount = 20; //Amount of enemies?
+	bool SpawnEnemies = false; //Spawn enemies?
+	int EnemyCount = 0; //Amount of enemies?
 	int ItemCount = 40; //Amount of items?
 	bool GodMode = false; //Use GodMode? (Invincible)
 	bool IgnoreEnergy = false; //Ignore energy depletion

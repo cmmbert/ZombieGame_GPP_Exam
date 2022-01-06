@@ -10,7 +10,4 @@ public:
 	}
 
 	void Update(float elapsedSec, IExamInterface* iFace, const vector<EntityInfo>& entities) override;
-
-private:
-	float m_PickupRange = 2.f;
 };

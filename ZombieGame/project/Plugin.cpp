@@ -120,9 +120,11 @@ SteeringPlugin_Output Plugin::UpdateSteering(float dt)
 	}
 
 	Brain testBrain(&m_WorldStates);
-	return testBrain.CalculateAction(m_pInterface);
+	auto steeringOutput = SteeringPlugin_Output();
 
-
+	auto hasToSteer = testBrain.CalculateAction(steeringOutput, m_pInterface, vEntitiesInFOV);
+	if (hasToSteer)
+		return steeringOutput;
 
 	//INVENTORY USAGE DEMO
 	//********************

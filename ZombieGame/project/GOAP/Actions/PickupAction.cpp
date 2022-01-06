@@ -23,12 +23,25 @@ bool PickupAction::Execute(SteeringPlugin_Output& steeringOutput, IExamInterface
 			if ((entityInfo.Location - iFace->Agent_GetInfo().Position).Magnitude() < iFace->Agent_GetInfo().GrabRange)
 			{
 				iFace->Item_Grab(entityInfo, item);
-				if (item.Type == eItemType::GARBAGE)
-				{
-					iFace->Item_Destroy(entityInfo);
+				switch (item.Type) {
+				case eItemType::PISTOL:
+					iFace->Inventory_RemoveItem(0);
+					iFace->Inventory_AddItem(0, item);
+					break;
+				case eItemType::MEDKIT:
+					iFace->Inventory_RemoveItem(1);
+					iFace->Inventory_AddItem(1, item);
+					break;
+				case eItemType::FOOD:
+					iFace->Inventory_RemoveItem(2);
+					iFace->Inventory_AddItem(2, item);
+					break;
+				case eItemType::GARBAGE: 
+				default:
+					iFace->Inventory_AddItem(3, item);
+					iFace->Inventory_RemoveItem(3);
 					break;
 				}
-				iFace->Inventory_AddItem(0, item);
 				break;
 			}
 

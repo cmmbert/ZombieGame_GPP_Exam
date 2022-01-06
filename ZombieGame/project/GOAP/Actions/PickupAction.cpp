@@ -29,8 +29,12 @@ bool PickupAction::Execute(SteeringPlugin_Output& steeringOutput, IExamInterface
 					iFace->Inventory_AddItem(0, item);
 					break;
 				case eItemType::MEDKIT:
-					iFace->Inventory_RemoveItem(1);
-					iFace->Inventory_AddItem(1, item);
+					if(!iFace->Inventory_AddItem(1, item))
+						if(!iFace->Inventory_AddItem(3, item))
+						{
+							iFace->Inventory_RemoveItem(1);
+							iFace->Inventory_AddItem(1, item);
+						}
 					break;
 				case eItemType::FOOD:
 					iFace->Inventory_RemoveItem(2);
@@ -38,8 +42,8 @@ bool PickupAction::Execute(SteeringPlugin_Output& steeringOutput, IExamInterface
 					break;
 				case eItemType::GARBAGE: 
 				default:
-					iFace->Inventory_AddItem(3, item);
-					iFace->Inventory_RemoveItem(3);
+					iFace->Inventory_AddItem(4, item);
+					iFace->Inventory_RemoveItem(4);
 					break;
 				}
 				break;

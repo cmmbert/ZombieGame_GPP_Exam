@@ -8,6 +8,8 @@
 #include "Graph/Dijkstra.h"
 
 #include "IExamInterface.h"
+#include "WorldStates/ItemInInventoryState.h"
+#include "WorldStates/WanderlustState.h"
 
 
 Brain::Brain(std::vector<WorldState*>* pWorldStates)
@@ -17,7 +19,7 @@ Brain::Brain(std::vector<WorldState*>* pWorldStates)
 	m_Actions.push_back(new Wander());
 	m_pGraph = new Graph();
 	m_Goals.push_back(new ItemInInventoryState(true));
-	m_Goals.push_back(new Wanderlust(true));
+	m_Goals.push_back(new WanderlustState(true));
 	m_pWorldStates = pWorldStates;
 }
 

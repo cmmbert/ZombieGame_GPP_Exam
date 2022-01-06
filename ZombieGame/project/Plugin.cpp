@@ -2,6 +2,10 @@
 #include "Plugin.h"
 #include "IExamInterface.h"
 #include "GOAP/Brain.h"
+#include "GOAP/WorldStates/ItemInInventoryState.h"
+#include "GOAP/WorldStates/ItemInViewState.h"
+#include "GOAP/WorldStates/NextToPickupState.h"
+#include "GOAP/WorldStates/WanderlustState.h"
 
 //Called only once, during initialization
 void Plugin::Initialize(IBaseInterface* pInterface, PluginInfo& info)
@@ -20,7 +24,7 @@ void Plugin::Initialize(IBaseInterface* pInterface, PluginInfo& info)
 	m_WorldStates.push_back(new ItemInInventoryState(false));
 	m_WorldStates.push_back(new ItemInViewState(false));
 	m_WorldStates.push_back(new NextToPickup(false));
-	m_WorldStates.push_back(new Wanderlust(false));
+	m_WorldStates.push_back(new WanderlustState(false));
 
 }
 
@@ -94,7 +98,7 @@ void Plugin::Update(float dt)
 //This function calculates the new SteeringOutput, called once per frame
 SteeringPlugin_Output Plugin::UpdateSteering(float dt)
 {
-	UpdateWorldStates();
+	UpdateWorldStates(dt);
 	auto steering = SteeringPlugin_Output();
 
 	//Use the Interface (IAssignmentInterface) to 'interface' with the AI_Framework
@@ -175,22 +179,13 @@ SteeringPlugin_Output Plugin::UpdateSteering(float dt)
 	return steering;
 }
 
-void Plugin::UpdateWorldStates()
+void Plugin::UpdateWorldStates(float elapsedSec)
 {
 	
 	auto entitties = GetEntitiesInFOV();
-	m_WorldStates[1]->Predicate = false;
-	m_WorldStates[2]->Predicate = false;
-
-	for (auto entityInfo : entitties)
+	for (auto state : m_WorldStates)
 	{
-		if (entityInfo.Type == eEntityType::ITEM)
-		{
-			m_WorldStates[1]->Predicate = true;
-			if((entityInfo.Location - m_pInterface->Agent_GetInfo().Position).Magnitude() < 2)
-				m_WorldStates[2]->Predicate = true;
-
-		}
+		state->Update(elapsedSec, m_pInterface, entitties);
 	}
 }
 

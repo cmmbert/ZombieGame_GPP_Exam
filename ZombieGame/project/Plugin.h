@@ -1,7 +1,7 @@
 #pragma once
 #include "IExamPlugin.h"
 #include "Exam_HelperStructs.h"
-#include "GOAP/WorldState.h"
+#include "GOAP/WorldStates/WorldState.h"
 
 class IBaseInterface;
 class IExamInterface;
@@ -20,7 +20,7 @@ public:
 	void Update(float dt) override;
 
 	SteeringPlugin_Output UpdateSteering(float dt) override;
-	void UpdateWorldStates();
+	void UpdateWorldStates(float elapsedSec);
 	void Render(float dt) const override;
 
 private:

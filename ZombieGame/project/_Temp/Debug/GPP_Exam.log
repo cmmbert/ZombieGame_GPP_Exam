@@ -1,4 +1,6 @@
 ﻿  stdafx.cpp
+  ItemInInventoryState.cpp
+  ItemInViewState.cpp
   Dijkstra.cpp
 D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\Graph\Dijkstra.cpp(23,21): warning C4018: '<': signed/unsigned mismatch
   Action.cpp
@@ -11,7 +13,9 @@ D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\Graph\D
   GraphNode.cpp
   GraphConnection.cpp
   Graph.cpp
+  NextToPickupState.cpp
   Plugin.cpp
+  WanderlustState.cpp
   Generating Code...
      Creating library D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\..\_DEMO_DEBUG\GPP_Plugin_d.lib and object D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\..\_DEMO_DEBUG\GPP_Plugin_d.exp
   GPP_Exam.vcxproj -> D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\_DEMO_DEBUG\GPP_Plugin_d.dll

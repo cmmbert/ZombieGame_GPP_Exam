@@ -8,22 +8,26 @@
 #include "Graph/Dijkstra.h"
 
 #include "IExamInterface.h"
+#include "Actions/ShootEnemyInView.h"
 #include "WorldStates/ItemInInventoryState.h"
 #include "WorldStates/WanderlustState.h"
+#include "WorldStates/ZombieInViewState.h"
 
 
 Brain::Brain(std::vector<WorldState*>* pWorldStates)
 {
 	m_Actions.push_back(new PickupAction());
+	m_Actions.push_back(new ShootEnemyInView());
 	m_Actions.push_back(new MoveToPickup());
 	m_Actions.push_back(new Wander());
 	m_pGraph = new Graph();
+	m_Goals.push_back(new ZombieInViewState(false));
 	m_Goals.push_back(new ItemInInventoryState(true));
 	m_Goals.push_back(new WanderlustState(true));
 	m_pWorldStates = pWorldStates;
 }
 
-bool Brain::CalculateAction(SteeringPlugin_Output& steeringOutput, IExamInterface* iFace, const vector<EntityInfo>& entities)
+bool Brain::CalculateAction(float elapsedSec, SteeringPlugin_Output& steeringOutput, IExamInterface* iFace, const vector<EntityInfo>& entities)
 {
 
 	//Figure out what to do
@@ -63,7 +67,7 @@ bool Brain::CalculateAction(SteeringPlugin_Output& steeringOutput, IExamInterfac
 	
 	
 
-	return currentAction->Execute(steeringOutput, iFace, entities);;
+	return currentAction->Execute(elapsedSec, steeringOutput, iFace, entities);;
 }
 
 void Brain::MakeGraph(WorldState* stateToAchieve)

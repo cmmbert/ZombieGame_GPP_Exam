@@ -5,6 +5,6 @@ class PickupAction final : public Action
 {
 public:
 	PickupAction();
-	bool Execute(SteeringPlugin_Output& steeringOutput, IExamInterface* iFace, const vector<EntityInfo>& entities) override;
+	bool Execute(float elapsedSec, SteeringPlugin_Output& steeringOutput, IExamInterface* iFace, const vector<EntityInfo>& entities) override;
 };
 

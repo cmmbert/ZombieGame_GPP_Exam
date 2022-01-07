@@ -1,13 +1,14 @@
 #include "stdafx.h"
 #include "Plugin.h"
 #include "IExamInterface.h"
-#include "GOAP/Brain.h"
+#include "GOAP/WorldStates/HasWeaponState.h"
 #include "GOAP/WorldStates/IsHungry.h"
 #include "GOAP/WorldStates/IsHurtState.h"
 #include "GOAP/WorldStates/ItemInInventoryState.h"
 #include "GOAP/WorldStates/ItemInViewState.h"
 #include "GOAP/WorldStates/NextToPickupState.h"
 #include "GOAP/WorldStates/WanderlustState.h"
+#include "GOAP/WorldStates/ZombieInViewState.h"
 
 //Called only once, during initialization
 void Plugin::Initialize(IBaseInterface* pInterface, PluginInfo& info)
@@ -23,12 +24,17 @@ void Plugin::Initialize(IBaseInterface* pInterface, PluginInfo& info)
 	info.Student_LastName = "Van Hoorick";
 	info.Student_Class = "2DAE14N";
 
+	m_WorldStates.push_back(new ZombieInViewState(false));
+	m_WorldStates.push_back(new HasWeaponState(false));
 	m_WorldStates.push_back(new IsHurtState(false));
 	m_WorldStates.push_back(new IsHungry(false));
 	m_WorldStates.push_back(new ItemInInventoryState(false));
 	m_WorldStates.push_back(new ItemInViewState(false));
 	m_WorldStates.push_back(new NextToPickup(false));
 	m_WorldStates.push_back(new WanderlustState(false));
+
+
+	m_Brain = new Brain(&m_WorldStates);
 
 }
 
@@ -104,9 +110,10 @@ SteeringPlugin_Output Plugin::UpdateSteering(float dt)
 {
 	UpdateWorldStates(dt);
 	auto steering = SteeringPlugin_Output();
-
 	//Use the Interface (IAssignmentInterface) to 'interface' with the AI_Framework
 	auto agentInfo = m_pInterface->Agent_GetInfo();
+
+	
 
 	auto nextTargetPos = m_Target; //To start you can use the mouse position as guidance
 
@@ -123,10 +130,9 @@ SteeringPlugin_Output Plugin::UpdateSteering(float dt)
 		}
 	}
 
-	Brain testBrain(&m_WorldStates);
 	auto steeringOutput = SteeringPlugin_Output();
 
-	auto hasToSteer = testBrain.CalculateAction(steeringOutput, m_pInterface, vEntitiesInFOV);
+	auto hasToSteer = m_Brain->CalculateAction(dt, steeringOutput, m_pInterface, vEntitiesInFOV);
 	if (hasToSteer)
 		return steeringOutput;
 

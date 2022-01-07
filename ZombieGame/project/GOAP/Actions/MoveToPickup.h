@@ -5,6 +5,6 @@ class MoveToPickup final : public Action
 {
 public:
 	MoveToPickup();
-	bool Execute(SteeringPlugin_Output& steeringOutput, IExamInterface* iFace, const vector<EntityInfo>& entities) override;
+	bool Execute(float elapsedSec, SteeringPlugin_Output& steeringOutput, IExamInterface* iFace, const vector<EntityInfo>& entities) override;
 };
 

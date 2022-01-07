@@ -13,7 +13,7 @@ PickupAction::PickupAction()
 	m_Name = typeid(this).name();
 }
 
-bool PickupAction::Execute(SteeringPlugin_Output& steeringOutput, IExamInterface* iFace, const vector<EntityInfo>& entities)
+bool PickupAction::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutput, IExamInterface* iFace, const vector<EntityInfo>& entities)
 {
 	auto item = ItemInfo();
 	for (const auto& entityInfo : entities)

@@ -14,7 +14,7 @@ MoveToPickup::MoveToPickup()
 	m_Weight = 2.5f;
 }
 
-bool MoveToPickup::Execute(SteeringPlugin_Output& steeringOutput, IExamInterface* iFace, const vector<EntityInfo>& entities)
+bool MoveToPickup::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutput, IExamInterface* iFace, const vector<EntityInfo>& entities)
 {
 	if (entities.empty()) return false;
 	Elite::Vector2 target;

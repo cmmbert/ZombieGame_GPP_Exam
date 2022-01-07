@@ -1,6 +1,7 @@
 #pragma once
 #include "IExamPlugin.h"
 #include "Exam_HelperStructs.h"
+#include "GOAP/Brain.h"
 #include "GOAP/WorldStates/WorldState.h"
 
 class IBaseInterface;
@@ -38,6 +39,7 @@ private:
 
 
 	std::vector<WorldState*> m_WorldStates;
+	Brain* m_Brain;
 
 };
 

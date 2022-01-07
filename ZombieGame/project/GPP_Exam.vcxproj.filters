@@ -8,7 +8,6 @@
     <ClCompile Include="GOAP\Actions\PickupAction.cpp" />
     <ClCompile Include="GOAP\Actions\Wander.cpp" />
     <ClCompile Include="GOAP\Brain.cpp" />
-    <ClCompile Include="GOAP\Goal.cpp" />
     <ClCompile Include="GOAP\WorldStates\WorldState.cpp" />
     <ClCompile Include="Graph\Graph.cpp" />
     <ClCompile Include="Graph\GraphConnection.cpp" />
@@ -20,6 +19,10 @@
     <ClCompile Include="GOAP\WorldStates\ItemInViewState.cpp" />
     <ClCompile Include="GOAP\WorldStates\IsHungry.cpp" />
     <ClCompile Include="GOAP\WorldStates\IsHurtState.cpp" />
+    <ClCompile Include="GOAP\Memory.cpp" />
+    <ClCompile Include="GOAP\WorldStates\ZombieInViewState.cpp" />
+    <ClCompile Include="GOAP\WorldStates\HasWeaponState.cpp" />
+    <ClCompile Include="GOAP\Actions\ShootEnemyInView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Plugin.h" />
@@ -29,7 +32,6 @@
     <ClInclude Include="GOAP\Actions\PickupAction.h" />
     <ClInclude Include="GOAP\Actions\Wander.h" />
     <ClInclude Include="GOAP\Brain.h" />
-    <ClInclude Include="GOAP\Goal.h" />
     <ClInclude Include="GOAP\WorldStates\WorldState.h" />
     <ClInclude Include="Graph\Graph.h" />
     <ClInclude Include="Graph\GraphConnection.h" />
@@ -41,5 +43,9 @@
     <ClInclude Include="GOAP\WorldStates\WanderlustState.h" />
     <ClInclude Include="GOAP\WorldStates\IsHungry.h" />
     <ClInclude Include="GOAP\WorldStates\IsHurtState.h" />
+    <ClInclude Include="GOAP\Memory.h" />
+    <ClInclude Include="GOAP\WorldStates\ZombieInViewState.h" />
+    <ClInclude Include="GOAP\WorldStates\HasWeaponState.h" />
+    <ClInclude Include="GOAP\Actions\ShootEnemyInView.h" />
   </ItemGroup>
 </Project>

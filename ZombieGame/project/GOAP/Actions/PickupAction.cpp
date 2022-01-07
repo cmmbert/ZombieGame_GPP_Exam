@@ -32,6 +32,7 @@ bool PickupAction::Execute(SteeringPlugin_Output& steeringOutput, IExamInterface
 					if(!iFace->Inventory_AddItem(1, item))
 						if(!iFace->Inventory_AddItem(3, item))
 						{
+							iFace->Inventory_UseItem(1);
 							iFace->Inventory_RemoveItem(1);
 							iFace->Inventory_AddItem(1, item);
 						}
@@ -40,10 +41,18 @@ bool PickupAction::Execute(SteeringPlugin_Output& steeringOutput, IExamInterface
 					{
 						ItemInfo food;
 						iFace->Inventory_GetItem(2, food);
+						//TODO if lower
 						if(iFace->Food_GetEnergy(food) < iFace->Food_GetEnergy(item))
 						{
+							iFace->Inventory_UseItem(2);
 							iFace->Inventory_RemoveItem(2);
 							iFace->Inventory_AddItem(2, item);
+						}
+						else
+						{
+							iFace->Inventory_AddItem(4, item);
+							iFace->Inventory_UseItem(4);
+							iFace->Inventory_RemoveItem(4);
 						}
 						break;
 					}

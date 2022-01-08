@@ -8,8 +8,10 @@
 #include "Graph/Dijkstra.h"
 
 #include "IExamInterface.h"
+#include "Actions/LeaveHouse.h"
 #include "Actions/MoveIntoHouse.h"
 #include "Actions/ShootEnemyInView.h"
+#include "WorldStates/IsInHouseState.h"
 #include "WorldStates/ItemInInventoryState.h"
 #include "WorldStates/WanderlustState.h"
 #include "WorldStates/ZombieInViewState.h"
@@ -21,17 +23,19 @@ Brain::Brain(std::vector<WorldState*>* pWorldStates)
 	m_Actions.push_back(new MoveIntoHouse());
 	m_Actions.push_back(new ShootEnemyInView());
 	m_Actions.push_back(new MoveToPickup());
+	m_Actions.push_back(new LeaveHouse());
 	m_Actions.push_back(new Wander());
 	m_pGraph = new Graph();
 	m_Goals.push_back(new ZombieInViewState(false));
 	m_Goals.push_back(new ItemInInventoryState(true));
+	m_Goals.push_back(new IsInHouseState(false));
 	m_Goals.push_back(new WanderlustState(true));
 	m_pWorldStates = pWorldStates;
 }
 
 bool Brain::CalculateAction(float elapsedSec, SteeringPlugin_Output& steeringOutput, IExamInterface* iFace, const vector<EntityInfo>& entities)
 {
-
+	
 	//Figure out what to do
 	WorldState* currentGoal = nullptr;
 	vector<GraphNode*> actions;

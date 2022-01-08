@@ -15,7 +15,19 @@ Wander::Wander()
 bool Wander::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutput, IExamInterface* iFace, const vector<EntityInfo>& entities)
 {
 	m_WanderTime += elapsedSec;
-	if (m_WanderTime > m_MaxWanderTime)
+	auto worldInfo = iFace->World_GetInfo();
+	auto agentPos = iFace->Agent_GetInfo().Position;
+	bool outOfBounds =
+		agentPos.y > worldInfo.Dimensions.y / 2 ||
+		agentPos.x > worldInfo.Dimensions.x / 2 ||
+		agentPos.y < -worldInfo.Dimensions.y / 2 ||
+		agentPos.x < -worldInfo.Dimensions.x / 2;
+	if (outOfBounds)
+	{
+		m_WanderDir = (worldInfo.Center - agentPos).GetNormalized();
+		m_WanderTime = 0;
+	}
+	else if (m_WanderTime > m_MaxWanderTime)
 	{
 		float degree = Elite::randomFloat(static_cast<float>(E_PI) * 2);
 		m_WanderDir = Elite::Vector2(cos(degree), sin(degree));

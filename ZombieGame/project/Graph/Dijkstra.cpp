@@ -16,9 +16,14 @@ std::vector<GraphNode*> Dijkstra::FindPath(Graph* pGraph, GraphNode* pStartNode,
 
 	vector<NodeRecord*> closedList;
 	auto lastRecord = new NodeRecord();
+
+	int loopCounter = 0;
+	int maxLoops = 1000;
 	while(!openList.empty())
 	{
-		
+		++loopCounter;
+		if (loopCounter >= maxLoops)
+			break;
 		bool endNodeFound = false;
 		for (size_t i = 0; i < openList.size(); ++i)
 		{

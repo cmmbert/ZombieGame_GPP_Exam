@@ -46,6 +46,8 @@ bool Brain::CalculateAction(float elapsedSec, SteeringPlugin_Output& steeringOut
 			if(state->m_Name == goal->m_Name && state->Predicate != goal->Predicate)
 			{
 				//Figure out how to do it
+				if (goal->m_Name == "ZombieInViewState")
+					auto test = 5;
 				MakeGraph(goal);
 				actions = Dijkstra::FindPath(m_pGraph, m_pGraph->GetNodeByIdx(0), m_pGraph->GetNodeByIdx(1));
 

@@ -24,5 +24,6 @@ private:
 			return costSoFar < other.costSoFar;
 		}
 	};
+	
 };
 

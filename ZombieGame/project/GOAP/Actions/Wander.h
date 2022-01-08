@@ -10,6 +10,6 @@ public:
 private:
 	Elite::Vector2 m_WanderDir;
 	float m_WanderTime = FLT_MAX - 10.f; //To trigger the random direction
-	float m_MaxWanderTime = 10.f;
+	float m_MaxWanderTime = 15.f;
 };
 

@@ -117,7 +117,7 @@ SteeringPlugin_Output Plugin::UpdateSteering(float dt)
 	//Use the Interface (IAssignmentInterface) to 'interface' with the AI_Framework
 	auto agentInfo = m_pInterface->Agent_GetInfo();
 
-	
+	auto worldInfo = m_pInterface->World_GetInfo();
 
 	auto nextTargetPos = m_Target; //To start you can use the mouse position as guidance
 

@@ -2,8 +2,10 @@
 #include "Plugin.h"
 #include "IExamInterface.h"
 #include "GOAP/WorldStates/HasWeaponState.h"
+#include "GOAP/WorldStates/HouseInViewState.h"
 #include "GOAP/WorldStates/IsHungry.h"
 #include "GOAP/WorldStates/IsHurtState.h"
+#include "GOAP/WorldStates/IsInHouseState.h"
 #include "GOAP/WorldStates/ItemInInventoryState.h"
 #include "GOAP/WorldStates/ItemInViewState.h"
 #include "GOAP/WorldStates/NextToPickupState.h"
@@ -19,11 +21,13 @@ void Plugin::Initialize(IBaseInterface* pInterface, PluginInfo& info)
 
 	//Bit information about the plugin
 	//Please fill this in!!
-	info.BotName = "GO GOAP";
+	info.BotName = "GO AAP";
 	info.Student_FirstName = "Bert";
 	info.Student_LastName = "Van Hoorick";
 	info.Student_Class = "2DAE14N";
 
+	m_WorldStates.push_back(new HouseInViewState(false));
+	m_WorldStates.push_back(new IsInHouseState(false));
 	m_WorldStates.push_back(new ZombieInViewState(false));
 	m_WorldStates.push_back(new HasWeaponState(false));
 	m_WorldStates.push_back(new IsHurtState(false));

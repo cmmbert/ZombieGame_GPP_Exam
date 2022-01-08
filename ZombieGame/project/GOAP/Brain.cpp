@@ -8,6 +8,7 @@
 #include "Graph/Dijkstra.h"
 
 #include "IExamInterface.h"
+#include "Actions/MoveIntoHouse.h"
 #include "Actions/ShootEnemyInView.h"
 #include "WorldStates/ItemInInventoryState.h"
 #include "WorldStates/WanderlustState.h"
@@ -17,6 +18,7 @@
 Brain::Brain(std::vector<WorldState*>* pWorldStates)
 {
 	m_Actions.push_back(new PickupAction());
+	m_Actions.push_back(new MoveIntoHouse());
 	m_Actions.push_back(new ShootEnemyInView());
 	m_Actions.push_back(new MoveToPickup());
 	m_Actions.push_back(new Wander());

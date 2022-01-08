@@ -198,6 +198,10 @@
     <ClInclude Include="GOAP\WorldStates\IsHurtState.h" />
     <ClInclude Include="GOAP\Memory.h" />
     <ClInclude Include="GOAP\WorldStates\HasWeaponState.h" />
+    <ClInclude Include="GOAP\WorldStates\HouseInViewState.h" />
+    <ClInclude Include="GOAP\Actions\MoveIntoHouse.h" />
+    <ClInclude Include="GOAP\WorldStates\IsInHouseState.h" />
+    <ClInclude Include="GOAP\Actions\LeaveHouse.h" />
     <ClInclude Include="Plugin.h" />
     <ClInclude Include="GOAP\Actions\ShootEnemyInView.h" />
     <ClInclude Include="stdafx.h" />
@@ -222,6 +226,10 @@
     <ClCompile Include="GOAP\WorldStates\IsHurtState.cpp" />
     <ClCompile Include="GOAP\Memory.cpp" />
     <ClCompile Include="GOAP\WorldStates\HasWeaponState.cpp" />
+    <ClCompile Include="GOAP\WorldStates\HouseInViewState.cpp" />
+    <ClCompile Include="GOAP\Actions\MoveIntoHouse.cpp" />
+    <ClCompile Include="GOAP\WorldStates\IsInHouseState.cpp" />
+    <ClCompile Include="GOAP\Actions\LeaveHouse.cpp" />
     <ClCompile Include="Plugin.cpp" />
     <ClCompile Include="GOAP\Actions\ShootEnemyInView.cpp" />
     <ClCompile Include="stdafx.cpp">

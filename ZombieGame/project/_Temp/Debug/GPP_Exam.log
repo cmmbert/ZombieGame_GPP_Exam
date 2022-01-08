@@ -16,11 +16,15 @@
   IsHurtState.cpp
   Memory.cpp
   HasWeaponState.cpp
+  HouseInViewState.cpp
+  MoveIntoHouse.cpp
+  IsInHouseState.cpp
+  Generating Code...
+  Compiling...
+  LeaveHouse.cpp
   Plugin.cpp
   ShootEnemyInView.cpp
   WanderlustState.cpp
-  Generating Code...
-  Compiling...
   ZombieInViewState.cpp
   Generating Code...
      Creating library D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\..\_DEMO_DEBUG\GPP_Plugin_d.lib and object D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\..\_DEMO_DEBUG\GPP_Plugin_d.exp

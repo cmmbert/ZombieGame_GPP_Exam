@@ -23,6 +23,10 @@
     <ClCompile Include="GOAP\WorldStates\ZombieInViewState.cpp" />
     <ClCompile Include="GOAP\WorldStates\HasWeaponState.cpp" />
     <ClCompile Include="GOAP\Actions\ShootEnemyInView.cpp" />
+    <ClCompile Include="GOAP\WorldStates\HouseInViewState.cpp" />
+    <ClCompile Include="GOAP\Actions\MoveIntoHouse.cpp" />
+    <ClCompile Include="GOAP\WorldStates\IsInHouseState.cpp" />
+    <ClCompile Include="GOAP\Actions\LeaveHouse.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Plugin.h" />
@@ -47,5 +51,9 @@
     <ClInclude Include="GOAP\WorldStates\ZombieInViewState.h" />
     <ClInclude Include="GOAP\WorldStates\HasWeaponState.h" />
     <ClInclude Include="GOAP\Actions\ShootEnemyInView.h" />
+    <ClInclude Include="GOAP\WorldStates\HouseInViewState.h" />
+    <ClInclude Include="GOAP\Actions\MoveIntoHouse.h" />
+    <ClInclude Include="GOAP\WorldStates\IsInHouseState.h" />
+    <ClInclude Include="GOAP\Actions\LeaveHouse.h" />
   </ItemGroup>
 </Project>

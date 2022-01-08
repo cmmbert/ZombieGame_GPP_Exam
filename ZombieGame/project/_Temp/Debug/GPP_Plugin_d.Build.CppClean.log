@@ -2,9 +2,9 @@ d:\school\2021-2022\gameplay prog\zombiegame_gpp_exam\zombiegame\project\_temp\d
 d:\school\2021-2022\gameplay prog\zombiegame_gpp_exam\zombiegame\project\_temp\debug\vc142.pdb
 d:\school\2021-2022\gameplay prog\zombiegame_gpp_exam\zombiegame\project\_temp\debug\vc142.idb
 d:\school\2021-2022\gameplay prog\zombiegame_gpp_exam\zombiegame\project\_temp\debug\stdafx.obj
-d:\school\2021-2022\gameplay prog\zombiegame_gpp_exam\zombiegame\project\_temp\debug\wanderluststate.obj
-d:\school\2021-2022\gameplay prog\zombiegame_gpp_exam\zombiegame\project\_temp\debug\shootenemyinview.obj
-d:\school\2021-2022\gameplay prog\zombiegame_gpp_exam\zombiegame\project\_temp\debug\plugin.obj
+d:\school\2021-2022\gameplay prog\zombiegame_gpp_exam\zombiegame\project\_temp\debug\isinhousestate.obj
+d:\school\2021-2022\gameplay prog\zombiegame_gpp_exam\zombiegame\project\_temp\debug\moveintohouse.obj
+d:\school\2021-2022\gameplay prog\zombiegame_gpp_exam\zombiegame\project\_temp\debug\houseinviewstate.obj
 d:\school\2021-2022\gameplay prog\zombiegame_gpp_exam\zombiegame\project\_temp\debug\hasweaponstate.obj
 d:\school\2021-2022\gameplay prog\zombiegame_gpp_exam\zombiegame\project\_temp\debug\memory.obj
 d:\school\2021-2022\gameplay prog\zombiegame_gpp_exam\zombiegame\project\_temp\debug\ishurtstate.obj
@@ -23,6 +23,9 @@ d:\school\2021-2022\gameplay prog\zombiegame_gpp_exam\zombiegame\project\_temp\d
 d:\school\2021-2022\gameplay prog\zombiegame_gpp_exam\zombiegame\project\_temp\debug\iteminviewstate.obj
 d:\school\2021-2022\gameplay prog\zombiegame_gpp_exam\zombiegame\project\_temp\debug\itemininventorystate.obj
 d:\school\2021-2022\gameplay prog\zombiegame_gpp_exam\zombiegame\project\_temp\debug\zombieinviewstate.obj
+d:\school\2021-2022\gameplay prog\zombiegame_gpp_exam\zombiegame\project\_temp\debug\wanderluststate.obj
+d:\school\2021-2022\gameplay prog\zombiegame_gpp_exam\zombiegame\project\_temp\debug\shootenemyinview.obj
+d:\school\2021-2022\gameplay prog\zombiegame_gpp_exam\zombiegame\project\_temp\debug\plugin.obj
 d:\school\2021-2022\gameplay prog\zombiegame_gpp_exam\zombiegame\_demo_debug\gpp_plugin_d.lib
 d:\school\2021-2022\gameplay prog\zombiegame_gpp_exam\zombiegame\_demo_debug\gpp_plugin_d.exp
 d:\school\2021-2022\gameplay prog\zombiegame_gpp_exam\zombiegame\project\_temp\debug\gpp_plugin_d.ilk

@@ -62,7 +62,7 @@ bool Brain::CalculateAction(float elapsedSec, SteeringPlugin_Output& steeringOut
 		}
 		if (currentGoal != nullptr) break;
 	}
-	std::cout << actions[1]->GetDescription() << "\n";
+	//std::cout << actions[1]->GetDescription() << "\n";
 	Action* currentAction = nullptr;
 	for(auto pAction : m_Actions)
 	{

@@ -112,6 +112,7 @@ void Plugin::Update(float dt)
 //This function calculates the new SteeringOutput, called once per frame
 SteeringPlugin_Output Plugin::UpdateSteering(float dt)
 {
+
 	UpdateWorldStates(dt);
 	auto steering = SteeringPlugin_Output();
 	//Use the Interface (IAssignmentInterface) to 'interface' with the AI_Framework

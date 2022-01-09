@@ -14,6 +14,7 @@ Wander::Wander()
 
 bool Wander::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutput, IExamInterface* iFace, const vector<EntityInfo>& entities)
 {
+	return false;
 	m_WanderTime += elapsedSec;
 	auto worldInfo = iFace->World_GetInfo();
 	auto agentPos = iFace->Agent_GetInfo().Position;

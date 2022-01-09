@@ -24,6 +24,8 @@
   LeaveHouse.cpp
   Plugin.cpp
   ShootEnemyInView.cpp
+  RecentlyBittenState.cpp
+  SprintBackwards.cpp
   WanderlustState.cpp
   ZombieInViewState.cpp
   Generating Code...

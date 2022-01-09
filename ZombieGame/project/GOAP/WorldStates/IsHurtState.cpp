@@ -6,10 +6,25 @@ void IsHurtState::Update(float elapsedSec, IExamInterface* iFace, const vector<E
 {
 	if (iFace->Agent_GetInfo().Health < m_HealthThreshold)
 	{
-		iFace->Inventory_UseItem(1);
 		ItemInfo pack;
-		iFace->Inventory_GetItem(1, pack);
-		if (iFace->Medkit_GetHealth(pack) == 0)
-			iFace->Inventory_RemoveItem(1);
+		if(iFace->Inventory_GetItem(1, pack))
+		{
+			iFace->Inventory_UseItem(1);
+			if (iFace->Medkit_GetHealth(pack) == 0)
+			{
+				iFace->Inventory_RemoveItem(1);
+			}
+		}
+		else
+		{
+			if (iFace->Inventory_GetItem(3, pack))
+			{
+				iFace->Inventory_UseItem(3);
+				if (iFace->Medkit_GetHealth(pack) == 0)
+				{
+					iFace->Inventory_RemoveItem(3);
+				}
+			}
+		}
 	}
 }

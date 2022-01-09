@@ -1,16 +1,33 @@
 ﻿  stdafx.cpp
+  ItemInInventoryState.cpp
+  ItemInViewState.cpp
+  Dijkstra.cpp
   Action.cpp
-  MoveTo.cpp
+  MoveToPickup.cpp
   PickupAction.cpp
   Wander.cpp
   Brain.cpp
-  Goal.cpp
   WorldState.cpp
   GraphNode.cpp
   GraphConnection.cpp
   Graph.cpp
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\Graph\Graph.cpp(47,2): warning C4002: too many arguments for function-like macro invocation 'assert'
+  NextToPickupState.cpp
+  IsHungry.cpp
+  IsHurtState.cpp
+  Memory.cpp
+  HasWeaponState.cpp
+  HouseInViewState.cpp
+  MoveIntoHouse.cpp
+  IsInHouseState.cpp
+  Generating Code...
+  Compiling...
+  LeaveHouse.cpp
   Plugin.cpp
+  ShootEnemyInView.cpp
+  RecentlyBittenState.cpp
+  SprintBackwards.cpp
+  WanderlustState.cpp
+  ZombieInViewState.cpp
   Generating Code...
      Creating library _Temp\Release\GPP_Plugin.lib and object _Temp\Release\GPP_Plugin.exp
   GPP_Exam.vcxproj -> D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\_DEMO_RELEASE\GPP_Plugin.dll

@@ -44,11 +44,13 @@ bool ShootEnemyInView::Execute(float elapsedSec, SteeringPlugin_Output& steering
 		if (iFace->Weapon_GetAmmo(pistol) == 0)
 			iFace->Inventory_RemoveItem(0);
 	}
-	else if (adjustVal > 0)
+	else if (adjustVal < 0)
 		steeringOutput.AngularVelocity = -agent.MaxAngularSpeed;
 	else
 		steeringOutput.AngularVelocity = agent.MaxAngularSpeed;
+
 	
-	steeringOutput.LinearVelocity = targetPosition - agent.Position;
+	steeringOutput.AutoOrient = false;
+	//steeringOutput.LinearVelocity = -target * agent.MaxLinearSpeed;
 	return true;
 }

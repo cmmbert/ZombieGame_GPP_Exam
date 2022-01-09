@@ -14,7 +14,7 @@ Wander::Wander()
 
 bool Wander::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutput, IExamInterface* iFace, const vector<EntityInfo>& entities)
 {
-	return false;
+	//return false;
 	m_WanderTime += elapsedSec;
 	auto worldInfo = iFace->World_GetInfo();
 	auto agentPos = iFace->Agent_GetInfo().Position;
@@ -36,5 +36,7 @@ bool Wander::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutput, IE
 		std::cout << "******New rand direction********\n";
 	}
 	steeringOutput.LinearVelocity = m_WanderDir * iFace->Agent_GetInfo().MaxLinearSpeed;
+
+	if (iFace->Agent_GetInfo().WasBitten) steeringOutput.RunMode = true;
 	return true;
 }

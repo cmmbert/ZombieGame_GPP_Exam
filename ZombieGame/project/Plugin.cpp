@@ -9,6 +9,7 @@
 #include "GOAP/WorldStates/ItemInInventoryState.h"
 #include "GOAP/WorldStates/ItemInViewState.h"
 #include "GOAP/WorldStates/NextToPickupState.h"
+#include "GOAP/WorldStates/RecentlyBittenState.h"
 #include "GOAP/WorldStates/WanderlustState.h"
 #include "GOAP/WorldStates/ZombieInViewState.h"
 
@@ -26,6 +27,7 @@ void Plugin::Initialize(IBaseInterface* pInterface, PluginInfo& info)
 	info.Student_LastName = "Van Hoorick";
 	info.Student_Class = "2DAE14N";
 
+	m_WorldStates.push_back(new RecentlyBittenState(false));
 	m_WorldStates.push_back(new HouseInViewState(false));
 	m_WorldStates.push_back(new IsInHouseState(false));
 	m_WorldStates.push_back(new ZombieInViewState(false));

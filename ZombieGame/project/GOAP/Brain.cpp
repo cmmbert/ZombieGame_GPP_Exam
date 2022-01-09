@@ -11,14 +11,17 @@
 #include "Actions/LeaveHouse.h"
 #include "Actions/MoveIntoHouse.h"
 #include "Actions/ShootEnemyInView.h"
+#include "Actions/SprintBackwards.h"
 #include "WorldStates/IsInHouseState.h"
 #include "WorldStates/ItemInInventoryState.h"
+#include "WorldStates/RecentlyBittenState.h"
 #include "WorldStates/WanderlustState.h"
 #include "WorldStates/ZombieInViewState.h"
 
 
 Brain::Brain(std::vector<WorldState*>* pWorldStates)
 {
+	m_Actions.push_back(new SprintBackwards());
 	m_Actions.push_back(new PickupAction());
 	m_Actions.push_back(new MoveIntoHouse());
 	m_Actions.push_back(new ShootEnemyInView());
@@ -27,6 +30,7 @@ Brain::Brain(std::vector<WorldState*>* pWorldStates)
 	m_Actions.push_back(new Wander());
 	m_pGraph = new Graph();
 	m_Goals.push_back(new ZombieInViewState(false));
+	m_Goals.push_back(new RecentlyBittenState(false));
 	m_Goals.push_back(new ItemInInventoryState(true));
 	m_Goals.push_back(new IsInHouseState(false));
 	m_Goals.push_back(new WanderlustState(true));
@@ -62,7 +66,7 @@ bool Brain::CalculateAction(float elapsedSec, SteeringPlugin_Output& steeringOut
 		}
 		if (currentGoal != nullptr) break;
 	}
-	//std::cout << actions[1]->GetDescription() << "\n";
+	std::cout << actions[1]->GetDescription() << "\n";
 	Action* currentAction = nullptr;
 	for(auto pAction : m_Actions)
 	{

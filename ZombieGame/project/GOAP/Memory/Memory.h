@@ -29,6 +29,8 @@ public:
 	static bool IsItemInMemory(ItemInfo item);
 	static vector<ItemInfo> GetAllItems() { return GetInstance()->m_ItemsSeen; }
 
+
+	static HouseInfo GetLastClosestHouse() { return GetInstance()->m_LastClosestHouse; }
 private:
 	Memory();
 	static Memory* m_Instance;
@@ -36,6 +38,8 @@ private:
 	vector<VisitedHouse> m_HousesSeen;
 
 	vector<ItemInfo> m_ItemsSeen;
+
+	HouseInfo m_LastClosestHouse;
 
 	bool m_WasInHouseLastFrame = false;
 

@@ -27,6 +27,8 @@ bool Memory::AddHouseToMemory(HouseInfo hi)
 
 bool Memory::IsHouseInMemory(HouseInfo hi)
 {
+	if (hi.Size == Elite::Vector2{ 0,0 }) return true; //Invalid house
+
 	for (auto visitedHouse : GetInstance()->m_HousesSeen)
 	{
 		if (visitedHouse.GetHouseInfo().Center == hi.Center)	return true;
@@ -43,7 +45,7 @@ bool Memory::AddItemToMemory(ItemInfo item)
 
 bool Memory::RemoveItemFromMemory(ItemInfo item)
 {
-	for (int i = 0; i < GetInstance()->m_ItemsSeen.size(); ++i)
+	for (size_t i = 0; i < GetInstance()->m_ItemsSeen.size(); ++i)
 	{
 		if (GetInstance()->m_ItemsSeen[i].Location == item.Location)
 		{
@@ -65,7 +67,7 @@ bool Memory::IsItemInMemory(ItemInfo item)
 
 void Memory::Update(float elapsedSec, IExamInterface* iFace)
 {
-	for (int i = 0; i < GetInstance()->m_HousesSeen.size(); ++i)
+	for (size_t i = 0; i < GetInstance()->m_HousesSeen.size(); ++i)
 	{
 		if(GetInstance()->m_HousesSeen[i].HasBeenForgotten(elapsedSec))
 		{
@@ -74,15 +76,43 @@ void Memory::Update(float elapsedSec, IExamInterface* iFace)
 		}
 	}
 	auto agent = iFace->Agent_GetInfo();
-	if (GetInstance()->m_WasInHouseLastFrame == false && agent.IsInHouse == true)
+	if ((GetInstance()->m_LastClosestHouse.Center - agent.Position).Magnitude() < 2)
 	{
-		HouseInfo hi = {};
-		if(iFace->Fov_GetHouseByIndex(0, hi))
-		{
-			AddHouseToMemory(hi);
-		}
+		AddHouseToMemory(GetInstance()->m_LastClosestHouse);
 	}
 	GetInstance()->m_WasInHouseLastFrame = agent.IsInHouse;
+
+
+	auto agentInfo = iFace->Agent_GetInfo();
+	//Update closestValidHouse
+	HouseInfo hi;
+
+	HouseInfo closestValidHouse;
+	closestValidHouse.Center = Elite::Vector2(FLT_MAX, FLT_MAX);
+	for (int i = 0;; ++i)
+	{
+		if (iFace->Fov_GetHouseByIndex(i, hi))
+		{
+			if (Memory::GetInstance()->IsHouseInMemory(hi))
+			{
+				continue;
+			}
+			if ((hi.Center - agentInfo.Position).Magnitude() < (closestValidHouse.Center - agentInfo.Position).Magnitude())
+			{
+				closestValidHouse = hi;
+			}
+		}
+		break;
+	}
+	if(closestValidHouse.Size != Elite::Vector2{0,0})
+		GetInstance()->m_LastClosestHouse = closestValidHouse;
+
+	iFace->Draw_Circle(GetInstance()->m_LastClosestHouse.Center, 5, Elite::Vector3(0, 0, 1));
+
+	for(const auto& house: GetInstance()->m_HousesSeen)
+	{
+		iFace->Draw_Circle(house.GetHouseInfo().Center, 10, Elite::Vector3(1, 0, 0));
+	}
 }
 
 Memory::Memory()

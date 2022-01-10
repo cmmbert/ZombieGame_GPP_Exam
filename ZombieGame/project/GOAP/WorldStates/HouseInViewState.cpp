@@ -9,6 +9,11 @@ void HouseInViewState::Update(float elapsedSec, IExamInterface* iFace, const vec
 {
 	Predicate = false;
 
+	if(!Memory::GetInstance()->IsHouseInMemory(Memory::GetInstance()->GetLastClosestHouse()))
+	{
+		Predicate = true;
+	}
+
 	HouseInfo hi = {};
 	for (int i = 0;; ++i)
 	{
@@ -16,7 +21,6 @@ void HouseInViewState::Update(float elapsedSec, IExamInterface* iFace, const vec
 		{
 			if(Memory::GetInstance()->IsHouseInMemory(hi))
 			{
-				iFace->Draw_Circle(hi.Center, 10, Elite::Vector3(1, 0, 0));
 				continue;
 			}
 			Predicate = true;

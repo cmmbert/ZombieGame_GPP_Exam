@@ -116,7 +116,7 @@ SteeringPlugin_Output Plugin::UpdateSteering(float dt)
 {
 
 	UpdateWorldStates(dt);
-	Memory::GetInstance()->Update(dt);
+	Memory::GetInstance()->Update(dt, m_pInterface);
 	auto steering = SteeringPlugin_Output();
 	//Use the Interface (IAssignmentInterface) to 'interface' with the AI_Framework
 	auto agentInfo = m_pInterface->Agent_GetInfo();

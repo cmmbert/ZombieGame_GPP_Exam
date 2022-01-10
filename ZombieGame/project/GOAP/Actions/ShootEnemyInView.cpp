@@ -17,6 +17,7 @@ ShootEnemyInView::ShootEnemyInView()
 bool ShootEnemyInView::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutput, IExamInterface* iFace,
 	const vector<EntityInfo>& entities)
 {
+	m_TimeSinceLastShot += elapsedSec;
 	auto agent = iFace->Agent_GetInfo();
 
 	Elite::Vector2 targetPosition{FLT_MAX, FLT_MAX};
@@ -38,11 +39,16 @@ bool ShootEnemyInView::Execute(float elapsedSec, SteeringPlugin_Output& steering
 	std::cout << adjustVal << "\n";
 	if (adjustVal < 0.1f && adjustVal > -0.1f)
 	{
-		iFace->Inventory_UseItem(0);
-		ItemInfo pistol;
-		iFace->Inventory_GetItem(0, pistol);
-		if (iFace->Weapon_GetAmmo(pistol) == 0)
-			iFace->Inventory_RemoveItem(0);
+		if(m_TimeSinceLastShot > m_GracePeriodBetweenShots)
+		{
+			iFace->Inventory_UseItem(0);
+			ItemInfo pistol;
+			iFace->Inventory_GetItem(0, pistol);
+			if (iFace->Weapon_GetAmmo(pistol) == 0)
+				iFace->Inventory_RemoveItem(0);
+
+			m_TimeSinceLastShot = 0;
+		}
 	}
 	else if (adjustVal < 0)
 		steeringOutput.AngularVelocity = -agent.MaxAngularSpeed;

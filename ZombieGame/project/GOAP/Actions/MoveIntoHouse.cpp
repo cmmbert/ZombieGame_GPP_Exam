@@ -3,6 +3,7 @@
 
 #include <IExamInterface.h>
 
+#include "GOAP/Memory/Memory.h"
 #include "GOAP/WorldStates/HouseInViewState.h"
 #include "GOAP/WorldStates/IsInHouseState.h"
 
@@ -17,15 +18,32 @@ MoveIntoHouse::MoveIntoHouse()
 bool MoveIntoHouse::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutput, IExamInterface* iFace,
 	const vector<EntityInfo>& entities)
 {
-	HouseInfo closestHouse;
-	if (!iFace->Fov_GetHouseByIndex(0, closestHouse))
+	auto agentInfo = iFace->Agent_GetInfo();
+
+	HouseInfo hi;
+	if (!iFace->Fov_GetHouseByIndex(0, hi))
 		assert(false); //There's probably something wrong with HouseInViewState. We should not execute this when there's no houses in our FOV
-	else
+
+	HouseInfo closestValidHouse;
+	closestValidHouse.Center = Elite::Vector2(FLT_MAX, FLT_MAX);
+	for (int i = 0;; ++i)
 	{
-		Elite::Vector2 target = iFace->NavMesh_GetClosestPathPoint(closestHouse.Center);
-		auto agentInfo = iFace->Agent_GetInfo();
-		steeringOutput.LinearVelocity = (target - agentInfo.Position).GetNormalized() * agentInfo.MaxLinearSpeed;
+		if (iFace->Fov_GetHouseByIndex(i, hi))
+		{
+			if (Memory::GetInstance()->IsHouseInMemory(hi))
+			{
+				continue;
+			}
+			if((hi.Center - agentInfo.Position).Magnitude() < (closestValidHouse.Center - agentInfo.Position).Magnitude())
+			{
+				closestValidHouse = hi;
+			}
+		}
+		break;
 	}
+
+	Elite::Vector2 target = iFace->NavMesh_GetClosestPathPoint(closestValidHouse.Center);
+	steeringOutput.LinearVelocity = (target - agentInfo.Position).GetNormalized() * agentInfo.MaxLinearSpeed;
 
 	return true;
 }

@@ -26,13 +26,13 @@ Brain::Brain(std::vector<WorldState*>* pWorldStates)
 	m_Actions.push_back(new MoveIntoHouse());
 	m_Actions.push_back(new ShootEnemyInView());
 	m_Actions.push_back(new MoveToPickup());
-	m_Actions.push_back(new LeaveHouse());
+	//m_Actions.push_back(new LeaveHouse());
 	m_Actions.push_back(new Wander());
 	m_pGraph = new Graph();
 	m_Goals.push_back(new ZombieInViewState(false));
 	m_Goals.push_back(new RecentlyBittenState(false));
 	m_Goals.push_back(new ItemInInventoryState(true));
-	m_Goals.push_back(new IsInHouseState(false));
+	//m_Goals.push_back(new IsInHouseState(false));
 	m_Goals.push_back(new WanderlustState(true));
 	m_pWorldStates = pWorldStates;
 }

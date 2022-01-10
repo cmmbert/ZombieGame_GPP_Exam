@@ -18,22 +18,14 @@ bool Wander::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutput, IE
 	//return false;
 	m_WanderTime += elapsedSec;
 	auto worldInfo = iFace->World_GetInfo();
-	auto agentPos = iFace->Agent_GetInfo().Position;
+	auto agent = iFace->Agent_GetInfo();
+	auto agentPos = agent.Position;
 
-	bool houseInView = false;
-	HouseInfo hi = {};
-	for (int i = 0;; ++i)
-	{
-		if (iFace->Fov_GetHouseByIndex(i, hi))
-		{
-			if (Memory::GetInstance()->IsHouseInMemory(hi))
-			{
-				houseInView = true;
-				break;
-			}
-		}
-		break;
-	}
+	if (agent.CurrentLinearSpeed < agent.MaxLinearSpeed / 10)
+		m_TimeStandingStill += elapsedSec;
+	else
+		m_TimeStandingStill = 0;
+
 
 	bool outOfBounds =
 		agentPos.y > worldInfo.Dimensions.y / 2 ||
@@ -45,15 +37,16 @@ bool Wander::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutput, IE
 		m_WanderDir = (worldInfo.Center - agentPos).GetNormalized();
 		m_WanderTime = 0;
 	}
-	else if (m_WanderTime > m_MaxWanderTime || houseInView)
+	else if (m_WanderTime > m_MaxWanderTime || m_TimeStandingStill > m_MaxTimeStandStill)
 	{
 		float degree = Elite::randomFloat(static_cast<float>(E_PI) * 2);
 		m_WanderDir = Elite::Vector2(cos(degree), sin(degree));
 		m_WanderTime = 0;
 		std::cout << "******New rand direction********\n";
 	}
-	steeringOutput.LinearVelocity = m_WanderDir * iFace->Agent_GetInfo().MaxLinearSpeed;
-
+	steeringOutput.LinearVelocity = (iFace->NavMesh_GetClosestPathPoint(m_WanderDir *10 + agentPos) - agentPos) * iFace->Agent_GetInfo().MaxLinearSpeed;
+	iFace->Draw_Circle(m_WanderDir * 100 + agentPos, 2, Elite::Vector3(1, 0, 0));
+	iFace->Draw_Circle(iFace->NavMesh_GetClosestPathPoint(m_WanderDir * 100 + agentPos), 2, Elite::Vector3(0, 1, 0));
 	if (iFace->Agent_GetInfo().WasBitten) steeringOutput.RunMode = true;
 	return true;
 }

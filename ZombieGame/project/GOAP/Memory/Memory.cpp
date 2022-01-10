@@ -32,7 +32,7 @@ bool Memory::IsHouseInMemory(HouseInfo hi)
 	return false;
 }
 
-void Memory::Update(float elapsedSec)
+void Memory::Update(float elapsedSec, IExamInterface* iFace)
 {
 	for (int i = 0; i < GetInstance()->m_HousesSeen.size(); ++i)
 	{

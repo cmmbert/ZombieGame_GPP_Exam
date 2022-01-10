@@ -15,21 +15,7 @@
   IsHungry.cpp
   IsHurtState.cpp
   Memory.cpp
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30133\include\xmemory(1965,1): error C2678: binary '==': no operator found which takes a left-hand operand of type 'VisitedHouse' (or there is no acceptable conversion)
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30133\include\random(1995,24): message : could be 'bool std::operator ==(const std::bernoulli_distribution &,const std::bernoulli_distribution &)'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\guiddef.h(192,15): message : or       'bool operator ==(const GUID &,const GUID &)' [found using argument-dependent lookup]
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\inc\Box2D\Common\b2Math.h(463,13): message : or       'bool operator ==(const b2Vec2 &,const b2Vec2 &)' [found using argument-dependent lookup]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30133\include\xmemory(1965,1): message : while trying to match the argument list '(VisitedHouse, const _Ty)'
-          with
-          [
-              _Ty=VisitedHouse
-          ]
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\GOAP\Memory\Memory.cpp(42): message : see reference to function template instantiation '_FwdIt std::remove<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>,VisitedHouse>(_FwdIt,const _FwdIt,const _Ty &)' being compiled
-          with
-          [
-              _FwdIt=std::_Vector_iterator<std::_Vector_val<std::_Simple_types<VisitedHouse>>>,
-              _Ty=VisitedHouse
-          ]
+D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\GOAP\Memory\Memory.cpp(37,20): warning C4018: '<': signed/unsigned mismatch
   HasWeaponState.cpp
   HouseInViewState.cpp
   MoveIntoHouse.cpp
@@ -45,3 +31,5 @@ D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\GOAP\Me
   ZombieInViewState.cpp
   VisitedHouse.cpp
   Generating Code...
+     Creating library _Temp\Release\GPP_Plugin.lib and object _Temp\Release\GPP_Plugin.exp
+  GPP_Exam.vcxproj -> D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\_DEMO_RELEASE\GPP_Plugin.dll

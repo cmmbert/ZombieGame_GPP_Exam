@@ -5,6 +5,8 @@
 
 #include "VisitedHouse.h"
 
+class IExamInterface;
+
 class Memory
 {
 public:
@@ -20,7 +22,7 @@ public:
 	//Returns false if house is already in memory
 	static bool AddHouseToMemory(HouseInfo hi);
 	static bool IsHouseInMemory(HouseInfo hi);
-	static void Update(float elapsedSec);
+	static void Update(float elapsedSec, IExamInterface* iFace);
 
 private:
 	Memory();

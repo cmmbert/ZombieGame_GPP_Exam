@@ -16,8 +16,10 @@ LeaveHouse::LeaveHouse()
 bool LeaveHouse::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutput, IExamInterface* iFace,
                          const vector<EntityInfo>& entities)
 {
-	auto target = iFace->NavMesh_GetClosestPathPoint({ 0,0 });
 	auto agentInfo = iFace->Agent_GetInfo();
+	auto dir = (Elite::Vector2(cosf(agentInfo.Orientation - static_cast<float>(M_PI / 2)), sinf(agentInfo.Orientation - static_cast<float>(M_PI / 2)))).GetNormalized() + agentInfo.Position;
+	auto target = iFace->NavMesh_GetClosestPathPoint(dir * 10);
+	iFace->Draw_Circle(dir * 10, 2, Elite::Vector3(0, 0, 1), 0.9f);
 	steeringOutput.LinearVelocity = (target - agentInfo.Position).GetNormalized() * agentInfo.MaxLinearSpeed;
 
 	HouseInfo hi;

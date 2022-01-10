@@ -29,7 +29,7 @@ bool MoveToPickup::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutp
 		if (distance < closestDistance)
 		{
 			closestDistance = distance;
-			steeringOutput.LinearVelocity = item.Location - agentInfo.Position;
+			steeringOutput.LinearVelocity = iFace->NavMesh_GetClosestPathPoint(item.Location) - agentInfo.Position;
 		}
 	}
 	steeringOutput.LinearVelocity = steeringOutput.LinearVelocity.GetNormalized() * agentInfo.MaxLinearSpeed;

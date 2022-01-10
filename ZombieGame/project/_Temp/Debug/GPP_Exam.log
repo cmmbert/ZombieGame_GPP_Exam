@@ -28,6 +28,7 @@
   SprintBackwards.cpp
   WanderlustState.cpp
   ZombieInViewState.cpp
+  VisitedHouse.cpp
   Generating Code...
      Creating library D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\..\_DEMO_DEBUG\GPP_Plugin_d.lib and object D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\..\_DEMO_DEBUG\GPP_Plugin_d.exp
   GPP_Exam.vcxproj -> D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\_DEMO_DEBUG\GPP_Plugin_d.dll

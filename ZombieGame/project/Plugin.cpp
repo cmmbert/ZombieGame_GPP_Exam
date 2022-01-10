@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Plugin.h"
 #include "IExamInterface.h"
+#include "GOAP/Memory/Memory.h"
 #include "GOAP/WorldStates/HasWeaponState.h"
 #include "GOAP/WorldStates/HouseInViewState.h"
 #include "GOAP/WorldStates/IsHungry.h"
@@ -41,7 +42,6 @@ void Plugin::Initialize(IBaseInterface* pInterface, PluginInfo& info)
 
 
 	m_Brain = new Brain(&m_WorldStates);
-
 }
 
 //Called only once

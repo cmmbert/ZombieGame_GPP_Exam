@@ -19,7 +19,7 @@
     <ClCompile Include="GOAP\WorldStates\ItemInViewState.cpp" />
     <ClCompile Include="GOAP\WorldStates\IsHungry.cpp" />
     <ClCompile Include="GOAP\WorldStates\IsHurtState.cpp" />
-    <ClCompile Include="GOAP\Memory.cpp" />
+    <ClCompile Include="GOAP\Memory\Memory.cpp" />
     <ClCompile Include="GOAP\WorldStates\ZombieInViewState.cpp" />
     <ClCompile Include="GOAP\WorldStates\HasWeaponState.cpp" />
     <ClCompile Include="GOAP\Actions\ShootEnemyInView.cpp" />
@@ -29,6 +29,7 @@
     <ClCompile Include="GOAP\Actions\LeaveHouse.cpp" />
     <ClCompile Include="GOAP\WorldStates\RecentlyBittenState.cpp" />
     <ClCompile Include="GOAP\Actions\SprintBackwards.cpp" />
+    <ClCompile Include="GOAP\Memory\VisitedHouse.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Plugin.h" />
@@ -49,7 +50,7 @@
     <ClInclude Include="GOAP\WorldStates\WanderlustState.h" />
     <ClInclude Include="GOAP\WorldStates\IsHungry.h" />
     <ClInclude Include="GOAP\WorldStates\IsHurtState.h" />
-    <ClInclude Include="GOAP\Memory.h" />
+    <ClInclude Include="GOAP\Memory\Memory.h" />
     <ClInclude Include="GOAP\WorldStates\ZombieInViewState.h" />
     <ClInclude Include="GOAP\WorldStates\HasWeaponState.h" />
     <ClInclude Include="GOAP\Actions\ShootEnemyInView.h" />
@@ -59,5 +60,6 @@
     <ClInclude Include="GOAP\Actions\LeaveHouse.h" />
     <ClInclude Include="GOAP\WorldStates\RecentlyBittenState.h" />
     <ClInclude Include="GOAP\Actions\SprintBackwards.h" />
+    <ClInclude Include="GOAP\Memory\VisitedHouse.h" />
   </ItemGroup>
 </Project>

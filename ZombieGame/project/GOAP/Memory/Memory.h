@@ -18,17 +18,23 @@ public:
 
 	static Memory* GetInstance();
 	static void Destroy();
+	static void Update(float elapsedSec, IExamInterface* iFace);
 
 	//Returns false if house is already in memory
 	static bool AddHouseToMemory(HouseInfo hi);
 	static bool IsHouseInMemory(HouseInfo hi);
-	static void Update(float elapsedSec, IExamInterface* iFace);
+
+	static bool AddItemToMemory(ItemInfo item);
+	static bool RemoveItemFromMemory(ItemInfo item);
+	static bool IsItemInMemory(ItemInfo item);
 
 private:
 	Memory();
 	static Memory* m_Instance;
 
 	vector<VisitedHouse> m_HousesSeen;
+
+	vector<ItemInfo> m_ItemsSeen;
 
 	bool m_WasInHouseLastFrame = false;
 

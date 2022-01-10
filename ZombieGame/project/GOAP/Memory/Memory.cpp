@@ -34,6 +34,35 @@ bool Memory::IsHouseInMemory(HouseInfo hi)
 	return false;
 }
 
+bool Memory::AddItemToMemory(ItemInfo item)
+{
+	if (IsItemInMemory(item)) return false;
+	GetInstance()->m_ItemsSeen.push_back(item);
+	return true;
+}
+
+bool Memory::RemoveItemFromMemory(ItemInfo item)
+{
+	for (int i = 0; i < GetInstance()->m_ItemsSeen.size(); ++i)
+	{
+		if (GetInstance()->m_ItemsSeen[i].Location == item.Location)
+		{
+			GetInstance()->m_ItemsSeen.erase(GetInstance()->m_ItemsSeen.begin() + i);
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Memory::IsItemInMemory(ItemInfo item)
+{
+	for (const auto& seenItem : GetInstance()->m_ItemsSeen)
+	{
+		if (seenItem.Location == item.Location)	return true;
+	}
+	return false;
+}
+
 void Memory::Update(float elapsedSec, IExamInterface* iFace)
 {
 	for (int i = 0; i < GetInstance()->m_HousesSeen.size(); ++i)

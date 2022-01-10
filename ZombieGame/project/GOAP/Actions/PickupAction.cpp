@@ -28,17 +28,34 @@ bool PickupAction::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutp
 				iFace->Item_Grab(entityInfo, item);
 				switch (item.Type) {
 				case eItemType::PISTOL:
-					iFace->Inventory_RemoveItem(0);
-					iFace->Inventory_AddItem(0, item);
+					if (!iFace->Inventory_AddItem(0, item))
+						if (!iFace->Inventory_AddItem(3, item))
+						{
+							ItemInfo pistol1;
+							iFace->Inventory_GetItem(0, pistol1);
+
+							ItemInfo pistol2;
+							iFace->Inventory_GetItem(3, pistol2);
+
+							if(iFace->Weapon_GetAmmo(pistol1) > iFace->Weapon_GetAmmo(pistol2))
+							{
+								iFace->Inventory_RemoveItem(1);
+								iFace->Inventory_AddItem(1, item);
+							}
+							else
+							{
+								iFace->Inventory_RemoveItem(3);
+								iFace->Inventory_AddItem(3, item);
+							}
+						}
 					break;
 				case eItemType::MEDKIT:
 					if(!iFace->Inventory_AddItem(1, item))
-						if(!iFace->Inventory_AddItem(3, item))
-						{
-							iFace->Inventory_UseItem(1);
-							iFace->Inventory_RemoveItem(1);
-							iFace->Inventory_AddItem(1, item);
-						}
+					{
+						iFace->Inventory_UseItem(1);
+						iFace->Inventory_RemoveItem(1);
+						iFace->Inventory_AddItem(1, item);
+					}
 					break;
 				case eItemType::FOOD:
 					{

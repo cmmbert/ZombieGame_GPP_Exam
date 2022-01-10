@@ -41,11 +41,20 @@ bool ShootEnemyInView::Execute(float elapsedSec, SteeringPlugin_Output& steering
 	{
 		if(m_TimeSinceLastShot > m_GracePeriodBetweenShots)
 		{
-			iFace->Inventory_UseItem(0);
+			int slotToUse = 0;
 			ItemInfo pistol;
-			iFace->Inventory_GetItem(0, pistol);
+			if(iFace->Inventory_GetItem(0, pistol))
+			{
+				slotToUse = 0;
+			}
+			else
+			{
+				iFace->Inventory_GetItem(3, pistol);
+				slotToUse = 3;
+			}
+			iFace->Inventory_UseItem(slotToUse);
 			if (iFace->Weapon_GetAmmo(pistol) == 0)
-				iFace->Inventory_RemoveItem(0);
+				iFace->Inventory_RemoveItem(slotToUse);
 
 			m_TimeSinceLastShot = 0;
 		}

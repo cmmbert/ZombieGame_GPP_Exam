@@ -15,7 +15,7 @@
   IsHungry.cpp
   IsHurtState.cpp
   Memory.cpp
-D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\GOAP\Memory\Memory.cpp(37,20): warning C4018: '<': signed/unsigned mismatch
+D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\GOAP\Memory\Memory.cpp(39,20): warning C4018: '<': signed/unsigned mismatch
   HasWeaponState.cpp
   HouseInViewState.cpp
   MoveIntoHouse.cpp

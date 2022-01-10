@@ -30,5 +30,7 @@ private:
 
 	vector<VisitedHouse> m_HousesSeen;
 
+	bool m_WasInHouseLastFrame = false;
+
 };
 

@@ -44,9 +44,12 @@ bool Wander::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutput, IE
 		m_WanderTime = 0;
 		std::cout << "******New rand direction********\n";
 	}
-	steeringOutput.LinearVelocity = (iFace->NavMesh_GetClosestPathPoint(m_WanderDir *10 + agentPos) - agentPos) * iFace->Agent_GetInfo().MaxLinearSpeed;
-	iFace->Draw_Circle(m_WanderDir * 100 + agentPos, 2, Elite::Vector3(1, 0, 0));
-	iFace->Draw_Circle(iFace->NavMesh_GetClosestPathPoint(m_WanderDir * 100 + agentPos), 2, Elite::Vector3(0, 1, 0));
+	auto wanderTarget = m_WanderDir * 50 + agentPos;
+	auto closestPathPoint = iFace->NavMesh_GetClosestPathPoint(wanderTarget);
+	iFace->Draw_Circle(wanderTarget, 2, Elite::Vector3(1, 0, 0));
+	iFace->Draw_Circle(closestPathPoint, 2, Elite::Vector3(0, 1, 0));
+	steeringOutput.LinearVelocity = (closestPathPoint - agentPos) * iFace->Agent_GetInfo().MaxLinearSpeed;
+
 	if (iFace->Agent_GetInfo().WasBitten) steeringOutput.RunMode = true;
 	return true;
 }

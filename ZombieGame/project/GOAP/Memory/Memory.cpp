@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Memory.h"
 
+#include <IExamInterface.h>
+
 Memory* Memory::m_Instance = nullptr;
 
 Memory* Memory::GetInstance()
@@ -42,6 +44,16 @@ void Memory::Update(float elapsedSec, IExamInterface* iFace)
 			break; //Break because we changed the size of the vector. Any other houses that had to be deleted will be deleted in the next frame
 		}
 	}
+	auto agent = iFace->Agent_GetInfo();
+	if (GetInstance()->m_WasInHouseLastFrame == false && agent.IsInHouse == true)
+	{
+		HouseInfo hi = {};
+		if(iFace->Fov_GetHouseByIndex(0, hi))
+		{
+			AddHouseToMemory(hi);
+		}
+	}
+	GetInstance()->m_WasInHouseLastFrame = agent.IsInHouse;
 }
 
 Memory::Memory()

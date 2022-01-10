@@ -201,7 +201,6 @@ SteeringPlugin_Output Plugin::UpdateSteering(float dt)
 
 void Plugin::UpdateWorldStates(float elapsedSec)
 {
-	
 	auto entitties = GetEntitiesInFOV();
 	for (auto state : m_WorldStates)
 	{

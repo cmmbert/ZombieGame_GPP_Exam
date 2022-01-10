@@ -27,6 +27,7 @@ public:
 	static bool AddItemToMemory(ItemInfo item);
 	static bool RemoveItemFromMemory(ItemInfo item);
 	static bool IsItemInMemory(ItemInfo item);
+	static vector<ItemInfo> GetAllItems() { return GetInstance()->m_ItemsSeen; }
 
 private:
 	Memory();

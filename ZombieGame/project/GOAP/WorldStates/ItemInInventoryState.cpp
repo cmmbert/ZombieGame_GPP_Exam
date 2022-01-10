@@ -6,8 +6,9 @@
 void ItemInInventoryState::Update(float elapsedSec, IExamInterface* iFace, const vector<EntityInfo>& entities)
 {
 	ItemInfo item;
-	Predicate = 
-		iFace->Inventory_GetItem(0, item) && 
+	Predicate = false;
+		/*iFace->Inventory_GetItem(0, item) && 
 		iFace->Inventory_GetItem(1, item) && 
-		iFace->Inventory_GetItem(2, item);
+		iFace->Inventory_GetItem(2, item);*/
+
 }

@@ -3,6 +3,7 @@
 
 #include <IExamInterface.h>
 
+#include "GOAP/Memory/Memory.h"
 #include "GOAP/WorldStates/ItemInViewState.h"
 #include "GOAP/WorldStates/NextToPickupState.h"
 
@@ -16,22 +17,19 @@ MoveToPickup::MoveToPickup()
 
 bool MoveToPickup::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutput, IExamInterface* iFace, const vector<EntityInfo>& entities)
 {
-	if (entities.empty()) return false;
-	Elite::Vector2 target;
-
-	float closestDistance = FLT_MAX;
+	//if (entities.empty()) return false;
+	
 	auto agentInfo = iFace->Agent_GetInfo();
-
-	for(const auto& entity : entities)
+	
+	Elite::Vector2 target;
+	float closestDistance = FLT_MAX;
+	for(auto item : Memory::GetAllItems())
 	{
-		if(entity.Type == eEntityType::ITEM)
+		float distance = (item.Location - agentInfo.Position).Magnitude();
+		if (distance < closestDistance)
 		{
-			float distance = (entity.Location - agentInfo.Position).Magnitude();
-			if(distance < closestDistance)
-			{
-				closestDistance = distance;
-				steeringOutput.LinearVelocity = entity.Location - agentInfo.Position;
-			}
+			closestDistance = distance;
+			steeringOutput.LinearVelocity = item.Location - agentInfo.Position;
 		}
 	}
 	steeringOutput.LinearVelocity = steeringOutput.LinearVelocity.GetNormalized() * agentInfo.MaxLinearSpeed;

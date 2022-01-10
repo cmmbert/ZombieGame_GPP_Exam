@@ -3,6 +3,7 @@
 
 #include <IExamInterface.h>
 
+#include "GOAP/Memory/Memory.h"
 #include "GOAP/WorldStates/IsInHouseState.h"
 #include "GOAP/WorldStates/ItemInInventoryState.h"
 #include "GOAP/WorldStates/NextToPickupState.h"
@@ -64,6 +65,7 @@ bool PickupAction::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutp
 					iFace->Inventory_RemoveItem(4);
 					break;
 				}
+				Memory::GetInstance()->RemoveItemFromMemory(item);
 				break;
 			}
 

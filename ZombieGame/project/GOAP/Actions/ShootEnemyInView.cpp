@@ -66,6 +66,6 @@ bool ShootEnemyInView::Execute(float elapsedSec, SteeringPlugin_Output& steering
 
 	
 	steeringOutput.AutoOrient = false;
-	//steeringOutput.LinearVelocity = -target * agent.MaxLinearSpeed;
+	steeringOutput.LinearVelocity = -target * agent.MaxLinearSpeed;
 	return true;
 }

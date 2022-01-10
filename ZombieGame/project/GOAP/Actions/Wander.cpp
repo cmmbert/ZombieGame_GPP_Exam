@@ -3,6 +3,7 @@
 
 #include <IExamInterface.h>
 
+#include "GOAP/Memory/Memory.h"
 #include "GOAP/WorldStates/WanderlustState.h"
 
 Wander::Wander()
@@ -18,6 +19,22 @@ bool Wander::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutput, IE
 	m_WanderTime += elapsedSec;
 	auto worldInfo = iFace->World_GetInfo();
 	auto agentPos = iFace->Agent_GetInfo().Position;
+
+	bool houseInView = false;
+	HouseInfo hi = {};
+	for (int i = 0;; ++i)
+	{
+		if (iFace->Fov_GetHouseByIndex(i, hi))
+		{
+			if (Memory::GetInstance()->IsHouseInMemory(hi))
+			{
+				houseInView = true;
+				break;
+			}
+		}
+		break;
+	}
+
 	bool outOfBounds =
 		agentPos.y > worldInfo.Dimensions.y / 2 ||
 		agentPos.x > worldInfo.Dimensions.x / 2 ||
@@ -28,7 +45,7 @@ bool Wander::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutput, IE
 		m_WanderDir = (worldInfo.Center - agentPos).GetNormalized();
 		m_WanderTime = 0;
 	}
-	else if (m_WanderTime > m_MaxWanderTime)
+	else if (m_WanderTime > m_MaxWanderTime || houseInView)
 	{
 		float degree = Elite::randomFloat(static_cast<float>(E_PI) * 2);
 		m_WanderDir = Elite::Vector2(cos(degree), sin(degree));

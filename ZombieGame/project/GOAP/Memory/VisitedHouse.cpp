@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "VisitedHouse.h"
 
-VisitedHouse::VisitedHouse(HouseInfo* hi)
+VisitedHouse::VisitedHouse(const HouseInfo& hi)
 {
-	m_pHouseInfo = hi;
+	m_HouseInfo = hi;
 }
 
 bool VisitedHouse::HasBeenForgotten(float elapsedSec)

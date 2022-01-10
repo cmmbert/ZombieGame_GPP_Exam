@@ -17,7 +17,10 @@ public:
 	static Memory* GetInstance();
 	static void Destroy();
 
-	static void AddHouseToMemory(HouseInfo* hi);
+	//Returns false if house is already in memory
+	static bool AddHouseToMemory(HouseInfo hi);
+	static bool IsHouseInMemory(HouseInfo hi);
+	static void Update(float elapsedSec);
 
 private:
 	Memory();

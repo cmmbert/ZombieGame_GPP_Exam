@@ -16,9 +16,32 @@ void Memory::Destroy()
 	m_Instance = nullptr;
 }
 
-void Memory::AddHouseToMemory(HouseInfo* hi)
+bool Memory::AddHouseToMemory(HouseInfo hi)
 {
+	if(IsHouseInMemory(hi)) return false;
 	GetInstance()->m_HousesSeen.push_back(VisitedHouse(hi));
+	return true;
+}
+
+bool Memory::IsHouseInMemory(HouseInfo hi)
+{
+	for (auto visitedHouse : GetInstance()->m_HousesSeen)
+	{
+		if (visitedHouse.GetHouseInfo().Center == hi.Center)	return true;
+	}
+	return false;
+}
+
+void Memory::Update(float elapsedSec)
+{
+	for (int i = 0; i < GetInstance()->m_HousesSeen.size(); ++i)
+	{
+		if(GetInstance()->m_HousesSeen[i].HasBeenForgotten(elapsedSec))
+		{
+			GetInstance()->m_HousesSeen.erase(GetInstance()->m_HousesSeen.begin() + i);
+			break; //Break because we changed the size of the vector. Any other houses that had to be deleted will be deleted in the next frame
+		}
+	}
 }
 
 Memory::Memory()

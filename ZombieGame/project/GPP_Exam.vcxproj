@@ -202,10 +202,12 @@
     <ClInclude Include="GOAP\Actions\MoveIntoHouse.h" />
     <ClInclude Include="GOAP\WorldStates\IsInHouseState.h" />
     <ClInclude Include="GOAP\Actions\LeaveHouse.h" />
+    <ClInclude Include="GOAP\WorldStates\IsInPurgeZoneState.h" />
     <ClInclude Include="Plugin.h" />
     <ClInclude Include="GOAP\Actions\ShootEnemyInView.h" />
     <ClInclude Include="GOAP\WorldStates\RecentlyBittenState.h" />
     <ClInclude Include="GOAP\Actions\SprintBackwards.h" />
+    <ClInclude Include="GOAP\Actions\RunFromPurge.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="GOAP\WorldStates\WanderlustState.h" />
     <ClInclude Include="GOAP\WorldStates\ZombieInViewState.h" />
@@ -233,10 +235,12 @@
     <ClCompile Include="GOAP\Actions\MoveIntoHouse.cpp" />
     <ClCompile Include="GOAP\WorldStates\IsInHouseState.cpp" />
     <ClCompile Include="GOAP\Actions\LeaveHouse.cpp" />
+    <ClCompile Include="GOAP\WorldStates\IsInPurgeZoneState.cpp" />
     <ClCompile Include="Plugin.cpp" />
     <ClCompile Include="GOAP\Actions\ShootEnemyInView.cpp" />
     <ClCompile Include="GOAP\WorldStates\RecentlyBittenState.cpp" />
     <ClCompile Include="GOAP\Actions\SprintBackwards.cpp" />
+    <ClCompile Include="GOAP\Actions\RunFromPurge.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

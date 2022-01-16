@@ -30,6 +30,8 @@
     <ClCompile Include="GOAP\WorldStates\RecentlyBittenState.cpp" />
     <ClCompile Include="GOAP\Actions\SprintBackwards.cpp" />
     <ClCompile Include="GOAP\Memory\VisitedHouse.cpp" />
+    <ClCompile Include="GOAP\WorldStates\IsInPurgeZoneState.cpp" />
+    <ClCompile Include="GOAP\Actions\RunFromPurge.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Plugin.h" />
@@ -61,5 +63,7 @@
     <ClInclude Include="GOAP\WorldStates\RecentlyBittenState.h" />
     <ClInclude Include="GOAP\Actions\SprintBackwards.h" />
     <ClInclude Include="GOAP\Memory\VisitedHouse.h" />
+    <ClInclude Include="GOAP\WorldStates\IsInPurgeZoneState.h" />
+    <ClInclude Include="GOAP\Actions\RunFromPurge.h" />
   </ItemGroup>
 </Project>

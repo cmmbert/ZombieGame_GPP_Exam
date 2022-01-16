@@ -23,6 +23,7 @@ bool MoveIntoHouse::Execute(float elapsedSec, SteeringPlugin_Output& steeringOut
 
 	Elite::Vector2 target = iFace->NavMesh_GetClosestPathPoint(Memory::GetInstance()->GetLastClosestHouse().Center);
 	steeringOutput.LinearVelocity = (target - agentInfo.Position).GetNormalized() * agentInfo.MaxLinearSpeed;
+	iFace->Draw_Circle(target, 2, Elite::Vector3(0, 1, 0));
 
 	return true;
 }

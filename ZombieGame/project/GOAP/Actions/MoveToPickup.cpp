@@ -16,9 +16,7 @@ MoveToPickup::MoveToPickup()
 }
 
 bool MoveToPickup::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutput, IExamInterface* iFace, const vector<EntityInfo>& entities)
-{
-	//if (entities.empty()) return false;
-	
+{	
 	auto agentInfo = iFace->Agent_GetInfo();
 	
 	Elite::Vector2 target;
@@ -29,9 +27,12 @@ bool MoveToPickup::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutp
 		if (distance < closestDistance)
 		{
 			closestDistance = distance;
-			steeringOutput.LinearVelocity = iFace->NavMesh_GetClosestPathPoint(item.Location) - agentInfo.Position;
+			target = iFace->NavMesh_GetClosestPathPoint(item.Location);
+			steeringOutput.LinearVelocity = target - agentInfo.Position;
 		}
 	}
 	steeringOutput.LinearVelocity = steeringOutput.LinearVelocity.GetNormalized() * agentInfo.MaxLinearSpeed;
+	iFace->Draw_Circle(target, 2, Elite::Vector3(0, 1, 0));
+
 	return true;
 }

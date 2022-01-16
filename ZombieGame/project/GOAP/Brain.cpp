@@ -10,9 +10,11 @@
 #include "IExamInterface.h"
 #include "Actions/LeaveHouse.h"
 #include "Actions/MoveIntoHouse.h"
+#include "Actions/RunFromPurge.h"
 #include "Actions/ShootEnemyInView.h"
 #include "Actions/SprintBackwards.h"
 #include "WorldStates/IsInHouseState.h"
+#include "WorldStates/IsInPurgeZoneState.h"
 #include "WorldStates/ItemInInventoryState.h"
 #include "WorldStates/RecentlyBittenState.h"
 #include "WorldStates/WanderlustState.h"
@@ -26,10 +28,12 @@ Brain::Brain(std::vector<WorldState*>* pWorldStates)
 	m_Actions.push_back(new MoveIntoHouse());
 	m_Actions.push_back(new ShootEnemyInView());
 	m_Actions.push_back(new MoveToPickup());
+	m_Actions.push_back(new RunFromPurge());
 	//m_Actions.push_back(new LeaveHouse());
 	m_Actions.push_back(new Wander());
 	m_pGraph = new Graph();
 	m_Goals.push_back(new ZombieInViewState(false));
+	m_Goals.push_back(new IsInPurgeZoneState(false));
 	m_Goals.push_back(new RecentlyBittenState(false));
 	m_Goals.push_back(new ItemInInventoryState(true));
 	//m_Goals.push_back(new IsInHouseState(false));
@@ -49,11 +53,11 @@ bool Brain::CalculateAction(float elapsedSec, SteeringPlugin_Output& steeringOut
 		{
 			if(state->m_Name == goal->m_Name && state->Predicate != goal->Predicate)
 			{
-				//Figure out how to do it
+				//Figure if it's possible and how to do it
 				MakeGraph(goal);
 				actions = Dijkstra::FindPath(m_pGraph, m_pGraph->GetNodeByIdx(0), m_pGraph->GetNodeByIdx(1));
 
-				//Check if endnode is present, if so then we have found our goal
+				//Check if endnode is present in the path, if so then we have found our goal
 				//If endnode is not present in the path then the goal is impossible right now
 				if (std::find(actions.begin(), actions.end(), m_pGraph->GetNodeByIdx(1)) != actions.end())
 				{

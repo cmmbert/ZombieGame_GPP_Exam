@@ -22,13 +22,16 @@
   Generating Code...
   Compiling...
   LeaveHouse.cpp
+  IsInPurgeZoneState.cpp
   Plugin.cpp
   ShootEnemyInView.cpp
   RecentlyBittenState.cpp
   SprintBackwards.cpp
+  RunFromPurge.cpp
   WanderlustState.cpp
   ZombieInViewState.cpp
   VisitedHouse.cpp
   Generating Code...
+D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\GOAP\Actions\RunFromPurge.cpp(33): warning C4715: 'RunFromPurge::Execute': not all control paths return a value
      Creating library D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\..\_DEMO_DEBUG\GPP_Plugin_d.lib and object D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\project\..\_DEMO_DEBUG\GPP_Plugin_d.exp
   GPP_Exam.vcxproj -> D:\School\2021-2022\Gameplay Prog\ZombieGame_GPP_Exam\ZombieGame\_DEMO_DEBUG\GPP_Plugin_d.dll

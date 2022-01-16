@@ -113,6 +113,18 @@ void Memory::Update(float elapsedSec, IExamInterface* iFace)
 	{
 		iFace->Draw_Circle(house.GetHouseInfo().Center, 10, Elite::Vector3(1, 0, 0));
 	}
+
+
+	//Recently bitten
+	if(GetInstance()->m_RecentlyBitten)
+	{
+		GetInstance()->m_TimeSinceBitten += elapsedSec;
+		if(GetInstance()->m_TimeSinceBitten > GetInstance()->m_BittenGracePeriod)
+		{
+			GetInstance()->m_RecentlyBitten = false;
+			GetInstance()->m_TimeSinceBitten = 0;
+		}
+	}
 }
 
 Memory::Memory()

@@ -140,6 +140,10 @@ SteeringPlugin_Output Plugin::UpdateSteering(float dt)
 
 	auto steeringOutput = SteeringPlugin_Output();
 
+	if (agentInfo.WasBitten) Memory::GetInstance()->m_RecentlyBitten = true;
+	if (Memory::GetInstance()->m_RecentlyBitten) 
+		steeringOutput.RunMode = true;
+
 	auto hasToSteer = m_Brain->CalculateAction(dt, steeringOutput, m_pInterface, vEntitiesInFOV);
 	if (hasToSteer)
 		return steeringOutput;

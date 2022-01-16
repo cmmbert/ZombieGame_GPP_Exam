@@ -31,6 +31,8 @@ public:
 
 
 	static HouseInfo GetLastClosestHouse() { return GetInstance()->m_LastClosestHouse; }
+	bool m_RecentlyBitten = false;
+
 private:
 	Memory();
 	static Memory* m_Instance;
@@ -43,5 +45,7 @@ private:
 
 	bool m_WasInHouseLastFrame = false;
 
+	float m_TimeSinceBitten;
+	float m_BittenGracePeriod = 2.f;
 };
 

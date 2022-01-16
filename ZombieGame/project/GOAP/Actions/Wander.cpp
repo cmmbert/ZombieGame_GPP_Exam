@@ -50,6 +50,5 @@ bool Wander::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutput, IE
 	iFace->Draw_Circle(closestPathPoint, 2, Elite::Vector3(0, 1, 0));
 	steeringOutput.LinearVelocity = (closestPathPoint - agentPos) * iFace->Agent_GetInfo().MaxLinearSpeed;
 
-	if (iFace->Agent_GetInfo().WasBitten) steeringOutput.RunMode = true;
 	return true;
 }

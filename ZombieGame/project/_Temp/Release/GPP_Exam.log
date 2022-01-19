@@ -1,5 +1,4 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\Microsoft.CppClean.targets(77,5): warning : Access to the path 'd:\school\2021-2022\gameplay prog\zombiegame_gpp_exam\zombiegame\_demo_release\gpp_plugin.dll' is denied.
-  stdafx.cpp
+﻿  stdafx.cpp
   ItemInInventoryState.cpp
   ItemInViewState.cpp
   Dijkstra.cpp

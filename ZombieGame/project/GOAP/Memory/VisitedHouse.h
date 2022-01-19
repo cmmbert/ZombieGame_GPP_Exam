@@ -10,6 +10,6 @@ public:
 private:
 	HouseInfo m_HouseInfo;
 	float m_SecondsSinceVisit = 0;
-	float m_SecondsTillRefresh = 60.f;
+	float m_SecondsTillRefresh = 160.f;
 };
 

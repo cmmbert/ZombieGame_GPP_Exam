@@ -107,7 +107,6 @@ void Memory::Update(float elapsedSec, IExamInterface* iFace)
 	if(closestValidHouse.Size != Elite::Vector2{0,0})
 		GetInstance()->m_LastClosestHouse = closestValidHouse;
 
-	iFace->Draw_Circle(GetInstance()->m_LastClosestHouse.Center, 5, Elite::Vector3(0, 0, 1));
 
 	for(const auto& house: GetInstance()->m_HousesSeen)
 	{
@@ -124,6 +123,15 @@ void Memory::Update(float elapsedSec, IExamInterface* iFace)
 			GetInstance()->m_RecentlyBitten = false;
 			GetInstance()->m_TimeSinceBitten = 0;
 		}
+	}
+
+
+	//Debug visualization
+	iFace->Draw_Circle(GetInstance()->m_LastClosestHouse.Center, 5, Elite::Vector3(0, 0, 1));
+
+	for (auto item : GetInstance()->m_ItemsSeen)
+	{
+		iFace->Draw_Circle(item.Location, 2, Elite::Vector3(1, 1, 0));
 	}
 }
 

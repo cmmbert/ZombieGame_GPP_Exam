@@ -7,6 +7,7 @@
 #include "GOAP/WorldStates/IsHungry.h"
 #include "GOAP/WorldStates/IsHurtState.h"
 #include "GOAP/WorldStates/IsInHouseState.h"
+#include "GOAP/WorldStates/IsInPurgeZoneState.h"
 #include "GOAP/WorldStates/ItemInInventoryState.h"
 #include "GOAP/WorldStates/ItemInViewState.h"
 #include "GOAP/WorldStates/NextToPickupState.h"
@@ -39,6 +40,7 @@ void Plugin::Initialize(IBaseInterface* pInterface, PluginInfo& info)
 	m_WorldStates.push_back(new ItemInViewState(false));
 	m_WorldStates.push_back(new NextToPickup(false));
 	m_WorldStates.push_back(new WanderlustState(false));
+	m_WorldStates.push_back(new IsInPurgeZoneState(false));
 
 
 	m_Brain = new Brain(&m_WorldStates);
@@ -141,8 +143,8 @@ SteeringPlugin_Output Plugin::UpdateSteering(float dt)
 	auto steeringOutput = SteeringPlugin_Output();
 
 	if (agentInfo.WasBitten) Memory::GetInstance()->m_RecentlyBitten = true;
-	if (Memory::GetInstance()->m_RecentlyBitten) 
-		steeringOutput.RunMode = true;
+	if (Memory::GetInstance()->m_RecentlyBitten) steeringOutput.RunMode = true;
+	if (agentInfo.Stamina > 9.f && agentInfo.LinearVelocity.Magnitude() < agentInfo.MaxLinearSpeed*0.9f) steeringOutput.RunMode = true;
 
 	auto hasToSteer = m_Brain->CalculateAction(dt, steeringOutput, m_pInterface, vEntitiesInFOV);
 	if (hasToSteer)

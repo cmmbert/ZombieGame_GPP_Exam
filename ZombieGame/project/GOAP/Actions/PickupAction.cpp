@@ -29,7 +29,7 @@ bool PickupAction::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutp
 				switch (item.Type) {
 				case eItemType::PISTOL:
 					if (!iFace->Inventory_AddItem(0, item))
-						if (!iFace->Inventory_AddItem(3, item))
+						if (!iFace->Inventory_AddItem(3, item))//If both pistol slots are already filled, check if one them has less ammo
 						{
 							ItemInfo pistol1;
 							iFace->Inventory_GetItem(0, pistol1);
@@ -37,15 +37,21 @@ bool PickupAction::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutp
 							ItemInfo pistol2;
 							iFace->Inventory_GetItem(3, pistol2);
 
-							if(iFace->Weapon_GetAmmo(pistol1) > iFace->Weapon_GetAmmo(pistol2))
+							if(iFace->Weapon_GetAmmo(pistol1) < iFace->Weapon_GetAmmo(pistol2))
 							{
-								iFace->Inventory_RemoveItem(1);
-								iFace->Inventory_AddItem(1, item);
+								if(iFace->Weapon_GetAmmo(item) > iFace->Weapon_GetAmmo(pistol1))
+								{
+									iFace->Inventory_RemoveItem(0);
+									iFace->Inventory_AddItem(0, item);
+								}
 							}
 							else
 							{
-								iFace->Inventory_RemoveItem(3);
-								iFace->Inventory_AddItem(3, item);
+								if (iFace->Weapon_GetAmmo(item) > iFace->Weapon_GetAmmo(pistol2))
+								{
+									iFace->Inventory_RemoveItem(3);
+									iFace->Inventory_AddItem(3, item);
+								}
 							}
 						}
 					break;
@@ -83,6 +89,8 @@ bool PickupAction::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutp
 					break;
 				}
 				Memory::GetInstance()->RemoveItemFromMemory(item);
+				iFace->Inventory_AddItem(4, item);
+				iFace->Inventory_RemoveItem(4);
 				break;
 			}
 

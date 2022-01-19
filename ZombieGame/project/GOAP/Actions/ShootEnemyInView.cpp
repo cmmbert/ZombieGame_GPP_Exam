@@ -36,8 +36,9 @@ bool ShootEnemyInView::Execute(float elapsedSec, SteeringPlugin_Output& steering
 	auto dir = (Elite::Vector2(cosf(agent.Orientation - static_cast<float>(M_PI /2)), sinf(agent.Orientation - static_cast<float>(M_PI / 2)))).GetNormalized();
 	auto target = (targetPosition - agent.Position).GetNormalized();
 	auto adjustVal = Elite::Cross(dir, target);
-	std::cout << adjustVal << "\n";
-	if (adjustVal < 0.1f && adjustVal > -0.1f)
+	auto adjustDegrees = Elite::ToDegrees(adjustVal);
+	std::cout << adjustVal << "; " << adjustDegrees << "\n";
+	if (adjustDegrees < 1.f && adjustDegrees > -1.f)
 	{
 		if(m_TimeSinceLastShot > m_GracePeriodBetweenShots)
 		{
@@ -59,11 +60,16 @@ bool ShootEnemyInView::Execute(float elapsedSec, SteeringPlugin_Output& steering
 			m_TimeSinceLastShot = 0;
 		}
 	}
-	else if (adjustVal < 0)
-		steeringOutput.AngularVelocity = -agent.MaxAngularSpeed;
 	else
-		steeringOutput.AngularVelocity = agent.MaxAngularSpeed;
+	{
+		if (adjustVal < 0)
+			steeringOutput.AngularVelocity = -agent.MaxAngularSpeed;
+		else
+			steeringOutput.AngularVelocity = agent.MaxAngularSpeed;
 
+		if (abs(adjustDegrees) < 5)
+			steeringOutput.AngularVelocity /= 2;
+	}
 	
 	steeringOutput.AutoOrient = false;
 	steeringOutput.LinearVelocity = -target * agent.MaxLinearSpeed;

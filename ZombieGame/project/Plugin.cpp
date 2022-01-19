@@ -44,6 +44,7 @@ void Plugin::Initialize(IBaseInterface* pInterface, PluginInfo& info)
 
 
 	m_Brain = new Brain(&m_WorldStates);
+	
 }
 
 //Called only once
@@ -63,10 +64,12 @@ void Plugin::InitGameDebugParams(GameDebugParams& params)
 {
 	params.AutoFollowCam = true; //Automatically follow the AI? (Default = true)
 	params.RenderUI = true; //Render the IMGUI Panel? (Default = true)
-	params.SpawnEnemies = true; //Do you want to spawn enemies? (Default = true)
+	params.SpawnEnemies = false; //Do you want to spawn enemies? (Default = true)
 	params.EnemyCount = 20; //How many enemies? (Default = 20)
 	params.GodMode = false; //GodMode > You can't die, can be usefull to inspect certain behaviours (Default = false)
 	params.AutoGrabClosestItem = true; //A call to Item_Grab(...) returns the closest item that can be grabbed. (EntityInfo argument is ignored)
+	params.SpawnPurgeZonesOnMiddleClick = true; // Middle mouse clicks spawn purge zones
+	params.PrintDebugMessages = false;
 }
 
 //Only Active in DEBUG Mode
@@ -129,16 +132,7 @@ SteeringPlugin_Output Plugin::UpdateSteering(float dt)
 
 	auto vHousesInFOV = GetHousesInFOV();//uses m_pInterface->Fov_GetHouseByIndex(...)
 	auto vEntitiesInFOV = GetEntitiesInFOV(); //uses m_pInterface->Fov_GetEntityByIndex(...)
-
-	for (auto& e : vEntitiesInFOV)
-	{
-		if (e.Type == eEntityType::PURGEZONE)
-		{
-			PurgeZoneInfo zoneInfo;
-			m_pInterface->PurgeZone_GetInfo(e, zoneInfo);
-			std::cout << "Purge Zone in FOV:" << e.Location.x << ", "<< e.Location.y <<  " ---EntityHash: " << e.EntityHash << "---Radius: "<< zoneInfo.Radius << std::endl;
-		}
-	}
+	
 
 	auto steeringOutput = SteeringPlugin_Output();
 

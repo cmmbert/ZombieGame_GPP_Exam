@@ -3,6 +3,8 @@
 
 #include <IExamInterface.h>
 
+#include "SeenPurge.h"
+
 Memory* Memory::m_Instance = nullptr;
 
 Memory* Memory::GetInstance()
@@ -34,6 +36,34 @@ bool Memory::IsHouseInMemory(HouseInfo hi)
 		if (visitedHouse.GetHouseInfo().Center == hi.Center)	return true;
 	}
 	return false;
+}
+
+bool Memory::AddPurgeToMemory(PurgeZoneInfo zi)
+{
+	if (IsPurgeInMemory(zi)) return false;
+	GetInstance()->m_PurgesSeen.push_back(SeenPurge(zi));
+	return true;
+}
+
+bool Memory::IsPurgeInMemory(PurgeZoneInfo zi)
+{
+	if (zi.ZoneHash == 0) return true; //Invalid purge
+
+	for (auto seenPurge : GetInstance()->m_PurgesSeen)
+	{
+		if (seenPurge.GetPurgeInfo().ZoneHash == zi.ZoneHash)	return true;
+	}
+	return false;
+}
+
+vector<PurgeZoneInfo> Memory::GetAllSeenPurges()
+{
+	vector<PurgeZoneInfo> purges;
+	for (auto purgeSeen : GetInstance()->m_PurgesSeen)
+	{
+		purges.push_back(purgeSeen.GetPurgeInfo());
+	}
+	return purges;
 }
 
 bool Memory::AddItemToMemory(ItemInfo item)
@@ -75,6 +105,17 @@ void Memory::Update(float elapsedSec, IExamInterface* iFace)
 			break; //Break because we changed the size of the vector. Any other houses that had to be deleted will be deleted in the next frame
 		}
 	}
+
+	for (size_t i = 0; i < GetInstance()->m_PurgesSeen.size(); ++i)
+	{
+		if (GetInstance()->m_PurgesSeen[i].ZoneIsSafeAgain(elapsedSec))
+		{
+			GetInstance()->m_PurgesSeen.erase(GetInstance()->m_PurgesSeen.begin() + i);
+			break; //Break because we changed the size of the vector. Any other purges that had to be deleted will be deleted in the next frame
+		}
+	}
+
+
 	auto agent = iFace->Agent_GetInfo();
 	if ((GetInstance()->m_LastClosestHouse.Center - agent.Position).Magnitude() < 2)
 	{
@@ -84,9 +125,9 @@ void Memory::Update(float elapsedSec, IExamInterface* iFace)
 
 
 	auto agentInfo = iFace->Agent_GetInfo();
+
 	//Update closestValidHouse
 	HouseInfo hi;
-
 	HouseInfo closestValidHouse;
 	closestValidHouse.Center = Elite::Vector2(FLT_MAX, FLT_MAX);
 	for (int i = 0;; ++i)
@@ -124,6 +165,8 @@ void Memory::Update(float elapsedSec, IExamInterface* iFace)
 			GetInstance()->m_TimeSinceBitten = 0;
 		}
 	}
+
+
 
 
 	//Debug visualization

@@ -39,16 +39,32 @@ bool Wander::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutput, IE
 	}
 	else if (m_WanderTime > m_MaxWanderTime || m_TimeStandingStill > m_MaxTimeStandStill)
 	{
-		float degree = Elite::randomFloat(static_cast<float>(E_PI) * 2);
-		m_WanderDir = Elite::Vector2(cos(degree), sin(degree));
-		m_WanderTime = 0;
-		std::cout << "******New rand direction********\n";
+		NewWanderDirection();
 	}
 	auto wanderTarget = m_WanderDir * 50 + agentPos;
 	auto closestPathPoint = iFace->NavMesh_GetClosestPathPoint(wanderTarget);
+
+	if(Memory::GetAllSeenPurges().empty() == false)
+	{
+		PurgeZoneInfo purge = Memory::GetAllSeenPurges()[0];
+		if((purge.Center - closestPathPoint).Magnitude() < purge.Radius + 10)
+		{
+			NewWanderDirection();
+			closestPathPoint = iFace->NavMesh_GetClosestPathPoint(wanderTarget);
+		}
+	}
+
 	iFace->Draw_Circle(wanderTarget, 2, Elite::Vector3(1, 0, 0));
 	iFace->Draw_Circle(closestPathPoint, 2, Elite::Vector3(0, 1, 0));
 	steeringOutput.LinearVelocity = (closestPathPoint - agentPos) * iFace->Agent_GetInfo().MaxLinearSpeed;
 
 	return true;
+}
+
+void Wander::NewWanderDirection()
+{
+	float degree = Elite::randomFloat(static_cast<float>(E_PI) * 2);
+	m_WanderDir = Elite::Vector2(cos(degree), sin(degree));
+	m_WanderTime = 0;
+	std::cout << "******New wander direction********\n";
 }

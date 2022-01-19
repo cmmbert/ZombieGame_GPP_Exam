@@ -39,8 +39,8 @@ struct GameDebugParams //Debuggin Purposes only (Ignored during release build)
 	int StartingDifficultyStage = 0; // Overwrites the difficulty stage
 	bool InfiniteStamina = false; // Agent has infinite stamina
 	bool SpawnDebugPistol = false; // Spawns pistol with 1000 ammo at start
-	bool SpawnPurgeZonesOnMiddleClick = false; // Middle mouse clicks spawn purge zones
-	bool PrintDebugMessages = true;
+	bool SpawnPurgeZonesOnMiddleClick = true; // Middle mouse clicks spawn purge zones
+	bool PrintDebugMessages = false;
 };
 #pragma endregion
 

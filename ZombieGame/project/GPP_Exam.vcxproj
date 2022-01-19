@@ -208,6 +208,7 @@
     <ClInclude Include="GOAP\WorldStates\RecentlyBittenState.h" />
     <ClInclude Include="GOAP\Actions\SprintBackwards.h" />
     <ClInclude Include="GOAP\Actions\RunFromPurge.h" />
+    <ClInclude Include="GOAP\Memory\SeenPurge.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="GOAP\WorldStates\WanderlustState.h" />
     <ClInclude Include="GOAP\WorldStates\ZombieInViewState.h" />
@@ -241,6 +242,7 @@
     <ClCompile Include="GOAP\WorldStates\RecentlyBittenState.cpp" />
     <ClCompile Include="GOAP\Actions\SprintBackwards.cpp" />
     <ClCompile Include="GOAP\Actions\RunFromPurge.cpp" />
+    <ClCompile Include="GOAP\Memory\SeenPurge.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

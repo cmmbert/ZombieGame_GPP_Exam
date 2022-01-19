@@ -5,6 +5,7 @@
 
 #include "VisitedHouse.h"
 
+class SeenPurge;
 class IExamInterface;
 
 class Memory
@@ -24,6 +25,11 @@ public:
 	static bool AddHouseToMemory(HouseInfo hi);
 	static bool IsHouseInMemory(HouseInfo hi);
 
+	//Returns false if purge is already in memory
+	static bool AddPurgeToMemory(PurgeZoneInfo zi);
+	static bool IsPurgeInMemory(PurgeZoneInfo zi);
+	static vector<PurgeZoneInfo> GetAllSeenPurges();
+
 	static bool AddItemToMemory(ItemInfo item);
 	static bool RemoveItemFromMemory(ItemInfo item);
 	static bool IsItemInMemory(ItemInfo item);
@@ -38,6 +44,7 @@ private:
 	static Memory* m_Instance;
 
 	vector<VisitedHouse> m_HousesSeen;
+	vector<SeenPurge> m_PurgesSeen;
 
 	vector<ItemInfo> m_ItemsSeen;
 
@@ -45,7 +52,7 @@ private:
 
 	bool m_WasInHouseLastFrame = false;
 
-	float m_TimeSinceBitten;
+	float m_TimeSinceBitten = 0;
 	float m_BittenGracePeriod = 2.f;
 };
 

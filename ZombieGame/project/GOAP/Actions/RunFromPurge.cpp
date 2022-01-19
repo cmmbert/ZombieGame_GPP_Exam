@@ -3,6 +3,7 @@
 
 #include <IExamInterface.h>
 
+#include "GOAP/Memory/Memory.h"
 #include "GOAP/WorldStates/IsInPurgeZoneState.h"
 
 RunFromPurge::RunFromPurge()
@@ -16,18 +17,23 @@ bool RunFromPurge::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutp
 	const vector<EntityInfo>& entities)
 {
 	Elite::Vector2 target;
-	for(const auto& entity : entities)
-	{
-		if(entity.Type == eEntityType::PURGEZONE)
-		{
-			PurgeZoneInfo purge;
-			iFace->PurgeZone_GetInfo(entity, purge);
-			target = (iFace->World_GetInfo().Center - purge.Center).GetNormalized() * 1000;
-			steeringOutput.LinearVelocity = iFace->NavMesh_GetClosestPathPoint(target) * iFace->Agent_GetInfo().MaxLinearSpeed;
-			if ((iFace->Agent_GetInfo().Position - purge.Center).Magnitude() < purge.Radius / 2)
-				steeringOutput.RunMode = true;
+	auto allSeenPurges = Memory::GetInstance()->GetAllSeenPurges();
+	if (allSeenPurges.empty()) return false;
+	PurgeZoneInfo purge = allSeenPurges[0];
 
-			return true;
-		}
-	}
+	auto worldInfo = iFace->World_GetInfo();
+	auto agentInfo = iFace->Agent_GetInfo();
+
+	if((worldInfo.Center - purge.Center).Magnitude() > (worldInfo.Center - agentInfo.Position).Magnitude())
+		target = (worldInfo.Center - purge.Center).GetNormalized() * 1000;
+	else
+		target = (agentInfo.Position - purge.Center).GetNormalized() * 1000;
+	target = iFace->NavMesh_GetClosestPathPoint(target);
+	steeringOutput.LinearVelocity = (target - agentInfo.Position).GetNormalized() * agentInfo.MaxLinearSpeed * iFace->Agent_GetInfo().MaxLinearSpeed;
+	iFace->Draw_Circle(target, 2, Elite::Vector3(0, 1, 0));
+
+	if ((iFace->Agent_GetInfo().Position - purge.Center).Magnitude() < purge.Radius / 2)
+		steeringOutput.RunMode = true;
+
+	return true;
 }

@@ -7,6 +7,7 @@ public:
 	Wander();
 	bool Execute(float elapsedSec, SteeringPlugin_Output& steeringOutput, IExamInterface* iFace, const vector<EntityInfo>& entities) override;
 
+	void NewWanderDirection();
 private:
 	Elite::Vector2 m_WanderDir;
 	float m_WanderTime = FLT_MAX - 10.f; //To trigger the random direction

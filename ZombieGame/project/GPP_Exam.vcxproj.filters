@@ -32,6 +32,7 @@
     <ClCompile Include="GOAP\Memory\VisitedHouse.cpp" />
     <ClCompile Include="GOAP\WorldStates\IsInPurgeZoneState.cpp" />
     <ClCompile Include="GOAP\Actions\RunFromPurge.cpp" />
+    <ClCompile Include="GOAP\Memory\SeenPurge.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Plugin.h" />
@@ -65,5 +66,6 @@
     <ClInclude Include="GOAP\Memory\VisitedHouse.h" />
     <ClInclude Include="GOAP\WorldStates\IsInPurgeZoneState.h" />
     <ClInclude Include="GOAP\Actions\RunFromPurge.h" />
+    <ClInclude Include="GOAP\Memory\SeenPurge.h" />
   </ItemGroup>
 </Project>

@@ -26,31 +26,47 @@ bool PickupAction::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutp
 			if ((entityInfo.Location - iFace->Agent_GetInfo().Position).Magnitude() < iFace->Agent_GetInfo().GrabRange)
 			{
 				iFace->Item_Grab(entityInfo, item);
+				Memory::GetInstance()->RemoveItemFromMemory(item);
 				switch (item.Type) {
 				case eItemType::PISTOL:
 					if (!iFace->Inventory_AddItem(0, item))
-						if (!iFace->Inventory_AddItem(3, item))//If both pistol slots are already filled, check if one them has less ammo
+						if (!iFace->Inventory_AddItem(3, item))
 						{
-							ItemInfo pistol1;
-							iFace->Inventory_GetItem(0, pistol1);
-
-							ItemInfo pistol2;
-							iFace->Inventory_GetItem(3, pistol2);
-
-							if(iFace->Weapon_GetAmmo(pistol1) < iFace->Weapon_GetAmmo(pistol2))
+							if (!iFace->Inventory_AddItem(4, item))//If all pistol slots are already filled, check if one them has less ammo
 							{
-								if(iFace->Weapon_GetAmmo(item) > iFace->Weapon_GetAmmo(pistol1))
+								ItemInfo pistol1;
+								iFace->Inventory_GetItem(0, pistol1);
+
+								ItemInfo pistol2;
+								iFace->Inventory_GetItem(3, pistol2);
+
+								ItemInfo pistol3;
+								iFace->Inventory_GetItem(4, pistol2);
+
+								int ammo0 = iFace->Weapon_GetAmmo(item);
+								int ammo1 = iFace->Weapon_GetAmmo(pistol1);
+								int ammo2 = iFace->Weapon_GetAmmo(pistol2);
+								int ammo3 = iFace->Weapon_GetAmmo(pistol3);
+
+								if(ammo1 < ammo0 && ammo1 < ammo2 && ammo1 < ammo3)
 								{
 									iFace->Inventory_RemoveItem(0);
 									iFace->Inventory_AddItem(0, item);
+									std::cout << "Replaced pistol in slot 0";
 								}
-							}
-							else
-							{
-								if (iFace->Weapon_GetAmmo(item) > iFace->Weapon_GetAmmo(pistol2))
+
+								if (ammo2 < ammo0 && ammo2 < ammo1 && ammo2 < ammo3)
 								{
 									iFace->Inventory_RemoveItem(3);
 									iFace->Inventory_AddItem(3, item);
+									std::cout << "Replaced pistol in slot 3";
+								}
+
+								if (ammo3 < ammo0 && ammo3 < ammo2 && ammo3 < ammo1)
+								{
+									iFace->Inventory_RemoveItem(4);
+									iFace->Inventory_AddItem(4, item);
+									std::cout << "Replaced pistol in slot 4";
 								}
 							}
 						}
@@ -73,23 +89,16 @@ bool PickupAction::Execute(float elapsedSec, SteeringPlugin_Output& steeringOutp
 							iFace->Inventory_RemoveItem(2);
 							iFace->Inventory_AddItem(2, item);
 						}
-						else
-						{
-							iFace->Inventory_AddItem(4, item);
-							iFace->Inventory_UseItem(4);
-							iFace->Inventory_RemoveItem(4);
-						}
 						break;
 					}
 				case eItemType::GARBAGE: 
 				default:
-					iFace->Inventory_AddItem(4, item);
-					iFace->Inventory_RemoveItem(4);
+					iFace->Item_Destroy(entityInfo);
+					std::cout << "Picked up garbage and tossed it";
+
 					break;
 				}
-				Memory::GetInstance()->RemoveItemFromMemory(item);
-				iFace->Inventory_AddItem(4, item);
-				iFace->Inventory_RemoveItem(4);
+				iFace->Item_Destroy(entityInfo);
 				break;
 			}
 

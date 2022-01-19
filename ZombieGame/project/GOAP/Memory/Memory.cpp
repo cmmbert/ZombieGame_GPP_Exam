@@ -51,7 +51,7 @@ bool Memory::IsPurgeInMemory(PurgeZoneInfo zi)
 
 	for (auto seenPurge : GetInstance()->m_PurgesSeen)
 	{
-		if (seenPurge.GetPurgeInfo().ZoneHash == zi.ZoneHash)	return true;
+		if (seenPurge.GetPurgeInfo().Center == zi.Center)	return true;
 	}
 	return false;
 }

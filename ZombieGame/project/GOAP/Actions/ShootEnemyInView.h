@@ -9,5 +9,5 @@ public:
 
 private:
 	float m_TimeSinceLastShot = 0;
-	float m_GracePeriodBetweenShots = 0.5f;
+	float m_GracePeriodBetweenShots = 0.f;
 };

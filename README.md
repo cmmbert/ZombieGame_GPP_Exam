@@ -14,10 +14,10 @@ For example, a state could be if the agent is currently inside a house or not (I
 Every frame the Update function gets called and this function needs to check if the state is true or false on this frame.
 
 ## Actions
-Actions are class that consists of these things:
+Actions are classes that consists of these things:
 ### Preconditions
 These are worldstates that must be fulfilled before the action can be taken.
-For example, the PickupItem action cannot be done without fullfilling the Precondition IsNextToItem(true)
+For example, the PickupItem action cannot be done without fullfilling the Precondition IsNextToItem(true).
 This list can be empty, which effectively means this action can always be done.
 
 ### Execute function

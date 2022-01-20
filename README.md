@@ -85,5 +85,20 @@ As we execute our MoveToPickup function we will eventually reach the item and fu
 
 This results in the agent moving into a house, followed by moving towards an item to then eventually pick up an item.
 
-![GOAP MakeGraph](https://user-images.githubusercontent.com/16197196/148697865-34c5287c-fb8a-46a0-9dd2-c960d872a714.png)
- 
+# Strengths
+- The flexability of coding in this system is very relieving. As before with FSM/BT structures it was a risk and a real headache to add an action or change one, the GOAP system allows you to simply add actions and worldstates on the fly.
+- The code is split up into understandable pieces and is thus easier to read.
+- All the actions are not interwoven, changing one action will not (or at least should not if you made it properly) affect the others.
+- Very straightforward once the initial learning curve is overwon. 
+
+# Weaknesses
+- The extra calculations being done might be too much when dealing with a lot of agents.
+- A bit of a learning curve before being able to work with it. You need to understand the structure before you are able to tinker with it.
+
+
+
+# Regrets
+As with any project, after finishing you can see the errors you made along the way and it's painfully obvious what you could have done better. This one is no different.
+
+### Navigation and graph
+I had originally planned to navigate the graph using A* instead of Dijkstra but I ran into issues when implementing when I realised I needed a position for each node to be able to do this.

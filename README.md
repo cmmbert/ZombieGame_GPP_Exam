@@ -63,9 +63,27 @@ For example, MoveToPickup has the precondition of IsInHouse(true) and MoveIntoHo
 And lastly, we will loop over all the actions and check if any of their effects fulfills the goal we are making the graph for. If so, we add a connection between the action and the EndNode.
 For example, the Pickup item action has the effect of IsInventoryFull(true) which is our current goal! So we connect Pickup item to the EndNode.
 
+
+### Navigating the graph
 This leaves us with something similar to this:
 ![1](https://user-images.githubusercontent.com/16197196/150381300-8956f6a2-0d58-4760-93cb-a886dffa4099.png)
 
+Note that we currently do not have a path from the StartNode to the EndNode. This means that the goal is currently not possible, which would result in the goal being skipped.
+However, to showcase how it works we will put the worldstate HouseInView on true and see what happens.
+![2](https://user-images.githubusercontent.com/16197196/150381782-c8b4b60e-01f7-4847-87e6-52a4d63cf256.png)
+We now have an uninterrupted path from the StartNode to the EndNode! This means our goal can be fullfilled and we can execute it! The agent will now get the first action of the path and execute it (for this frame). Remember that this will all be recalculated on the next frame.
+On this frame, the agent will run the Execute function of the MoveIntoHouse action.
+
+#### What happens if multiple paths are found?
+So we have been executing the MoveIntoHouse function for a while now which presumably moves the agent into the house. Exactly this frame the worldstate ItemInView becomes true. This now means all preconditions for MoveToPickup have been fulfilled. This means the MoveToPickup is connected to the StartNode ontop of MoveIntoHouse being connected.
+![3](https://user-images.githubusercontent.com/16197196/150383489-c6d3fd6e-bb54-4c43-8873-7f91870d4f47.png)
+No worries however, as we will use pathfinding to find the shortest path in the graph.
+We let our Dijkstra algorithm loose on the graph and task it to find the shortest path between StartNode and EndNode. This results in the MoveToPickup being the first action selected.
+
+As we execute our MoveToPickup function we will eventually reach the item and fulfill the preconditions of the Pickup item action. Which will then be the shortest path.
+![4](https://user-images.githubusercontent.com/16197196/150383866-4a686f53-1487-4bc0-83e7-df92de515885.png)
+
+This results in the agent moving into a house, followed by moving towards an item to then eventually pick up an item.
 
 ![GOAP MakeGraph](https://user-images.githubusercontent.com/16197196/148697865-34c5287c-fb8a-46a0-9dd2-c960d872a714.png)
  

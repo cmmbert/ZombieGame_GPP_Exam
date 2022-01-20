@@ -32,7 +32,7 @@ However, these things are not linked in reality. If you execute the Pickup item 
 
 ## Goals
 Every frame, the agent will decide what action it wants to take. To do this it will look at its predefined set of goals. 
-A goal is simply a worldstate that the agent wishes to achieve. This could be a state that is never achievable. (wanderlust is such an example)
+A goal is simply a worldstate that the agent wishes to achieve. This could be a state that is never achievable. (wanderlust is such an example).
 A list of goals could look like this:
 ![Goals](https://user-images.githubusercontent.com/16197196/150377089-bc48e6f7-1c66-4c62-8480-96ef60d2d28b.png)
 
@@ -86,10 +86,10 @@ As we execute our MoveToPickup function we will eventually reach the item and fu
 This results in the agent moving into a house, followed by moving towards an item to then eventually pick up an item.
 
 # Strengths
-- The flexability of coding in this system is very relieving. As before with FSM/BT structures it was a risk and a real headache to add an action or change one, the GOAP system allows you to simply add actions and worldstates on the fly.
+- The flexibility of coding in this system is very relieving. As before with FSM/BT structures it was a risk and a real headache to add an action or change one, the GOAP system allows you to simply add actions and worldstates on the fly.
 - The code is split up into understandable pieces and is thus easier to read.
 - All the actions are not interwoven, changing one action will not (or at least should not if you made it properly) affect the others.
-- Very straightforward once the initial learning curve is overwon. 
+- Very straightforward once the initial learning curve is overcome. 
 
 # Weaknesses
 - The extra calculations being done might be too much when dealing with a lot of agents.

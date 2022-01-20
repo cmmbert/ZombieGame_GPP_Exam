@@ -101,4 +101,10 @@ This results in the agent moving into a house, followed by moving towards an ite
 As with any project, after finishing you can see the errors you made along the way and it's painfully obvious what you could have done better. This one is no different.
 
 ### Navigation and graph
-I had originally planned to navigate the graph using A* instead of Dijkstra but I ran into issues when implementing when I realised I needed a position for each node to be able to do this.
+I had originally planned to navigate the graph using A* but I ran into issues when implementing when I realised I needed a position for each node to be able to do this. I scrapped the idea of using A* and resorted to using Dijkstra instead as I thought I could not implement positions on this graph. After all, an action cannot have a position can it? After thinking about it more thoroughly I realised that I could have given the actions a 'virtual' position on the graph and used that for the A* pathfinding.
+
+### Inventory management
+I had issues with deleting an item without first adding it to my inventory so I resorted to a temporary solution.
+The temporary solution involved adding any item I wanted to drop to the last slot of the inventory and then instantly discarding it.
+As it turns out, in software development theres nothing more permanent than a temporary solution.
+Fixing this would require me to rewrite 90% of the pickup item action. Which is perfectly do-able but alas, I am out of time.

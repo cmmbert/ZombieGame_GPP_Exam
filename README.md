@@ -92,12 +92,12 @@ This results in the agent moving into a house, followed by moving towards an ite
 - Very straightforward once the initial learning curve is overcome. 
 
 # Weaknesses
-- The extra calculations being done might be too much when dealing with a lot of agents.
+- This algorithm adds a lot of calculations every frame, thus making it unsuitable for a lot of agents.
 - A bit of a learning curve before being able to work with it. You need to understand the structure before you are able to tinker with it.
 
 
 
-# Regrets
+# Reflections
 As with any project, after finishing you can see the errors you made along the way and it's painfully obvious what you could have done better. This one is no different.
 
 ### Navigation and graph
